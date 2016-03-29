@@ -20,6 +20,14 @@
             <result name="success">pages/index.jsp</result>
         </action>
         
+        <action name="testConnection" method="testConnection" class="br.com.unisc.action.ConfigurationAction">
+            <result name="success" type="json">
+                <param name="includeProperties">
+                    ^dsMessage
+                </param>
+            </result>
+        </action>
+        
     </package>
 	
 </struts>

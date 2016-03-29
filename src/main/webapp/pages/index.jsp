@@ -34,7 +34,7 @@
             <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="container">
                     <div class="navbar-header" >
-                        <span class="navbar-brand">Gerência e Administração de Redes - Trabalho 2 - Gerente SNMP - Prof. Lucas Muller</span>
+                        <span class="navbar-brand">TCC 2 - Ferramenta para criação de ambientes gamificados</span>
                     </div>
                     <div class="nav navbar-nav navbar-right" style="margin-top: 1%;s">
                     </div>
@@ -96,13 +96,14 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Password</span>
-                                                <s:password id="nmPass" name="connection.nmPass" cssClass="form-control" placeholder="Ex: myP@ssword"/>
+                                                <s:password id="cdPass" name="connection.cdPass" cssClass="form-control" placeholder="Ex: myP@ssword"/>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="panel-footer text-right">
                                         <a class="btn btn-default" onclick="clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
+                                        <a class="btn btn-default" onclick="testConnection();"><i class="glyphicon glyphicon-play"></i> Test Connection</a>
                                         <a class="btn btn-primary" onclick="saveModifications();"><i class="glyphicon glyphicon-log-in"></i> Save Modifications</a>
                                     </div>
                                 </div>
