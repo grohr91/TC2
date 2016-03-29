@@ -8,7 +8,7 @@ function clearForm(formId) {
 
 function testConnection() {
     $.ajax({
-        url: "http://localhost:8084/TC2/testConnection",
+        url: $("#url").val() + "/TC2/testConnection",
         data: $("#connectionForm").serialize()
     }).done(function (data) {
         if (console && console.log) {

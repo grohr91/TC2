@@ -16,11 +16,11 @@
             </result>
         </action>
 		
-        <action name="index" method="main" class="br.com.unisc.action.ConfigurationAction">
+        <action name="index" method="main" class="br.unisc.action.ConfigurationAction">
             <result name="success">pages/index.jsp</result>
         </action>
         
-        <action name="testConnection" method="testConnection" class="br.com.unisc.action.ConfigurationAction">
+        <action name="testConnection" method="testConnection" class="br.unisc.action.ConfigurationAction">
             <result name="success" type="json">
                 <param name="includeProperties">
                     ^dsMessage
