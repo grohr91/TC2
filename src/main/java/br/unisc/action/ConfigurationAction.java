@@ -28,12 +28,14 @@ public class ConfigurationAction extends ActionSupport {
     }
 
     public String testConnection() {
-        dsMessage = connection.open();
-        connection.close();
-        if (dsMessage.isEmpty()) {
-            return SUCCESS;
+        try {
+            dsMessage = connection.open();
+            connection.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            dsMessage = "Something wrong occoured";
         }
-        return ERROR;
+        return SUCCESS;
     }
 
     public ConnectionDTO getConnection() {
@@ -42,6 +44,18 @@ public class ConfigurationAction extends ActionSupport {
 
     public void setConnection(ConnectionDTO connection) {
         this.connection = connection;
+    }
+
+    public String getDsMessage() {
+        if (dsMessage != null && !dsMessage.isEmpty()) {
+            dsMessage = "<div class=\"alert alert-danger\" role=\"alert\">"
+                    + dsMessage + "</div>";
+        }
+        return dsMessage;
+    }
+
+    public void setDsMessage(String dsMessage) {
+        this.dsMessage = dsMessage;
     }
 
 }

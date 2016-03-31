@@ -12,13 +12,18 @@ import javax.persistence.Persistence;
  */
 public class ConnectionDTO {
 
+    private EntityManager em;
+
     private String nrIp;
     private Integer nrPort;
     private String nmService;
     private String nmDatabase;
     private String nmUser;
     private String cdPass;
-    private EntityManager em;
+    private Integer dbType;
+
+    private static final int POSTGRESQL = 1;
+    private static final int MYSQL = 2;
 
     public String getNrIp() {
         return nrIp;
@@ -68,24 +73,59 @@ public class ConnectionDTO {
         this.cdPass = cdPass;
     }
 
+    public String validateParams() {
+        if (nmUser == null || nmUser.isEmpty()) {
+            return "User cannot be blank";
+        }
+        if (cdPass == null || cdPass.isEmpty()) {
+            return "Password cannot be blank";
+        }
+        if (nrIp == null || nrIp.isEmpty()) {
+            return "Host cannot be blank";
+        }
+        if (nrPort == null || nrPort == 0) {
+            return "Port cannot be blank";
+        }
+        if (nmDatabase == null || nmDatabase.isEmpty()) {
+            return "Port cannot be blank";
+        }
+        return "";
+    }
+
     public String open() {
-        Map<String, String> properties = new HashMap<String, String>();
-        properties.put("javax.persistence.jdbc.user", nmUser);
-        properties.put("javax.persistence.jdbc.password", cdPass);
-        properties.put("javax.persistence.jdbc.database", nmDatabase);
-        properties.put("javax.persistence.jdbc.port", nrPort.toString());
+        String validate = validateParams();
+        if (!validate.isEmpty()) {
+            return validate;
+        }
+        Map<String, String> properties = getMapByDbType();
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersistenceTcc");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersistenceTcc", properties);
             em = emf.createEntityManager();
+            em.getTransaction().begin();
         } catch (Exception ex) {
             ex.printStackTrace();
+            close();
             return ex.getMessage();
         }
         return "";
     }
 
     public void close() {
-        em.close();
+        if (em != null && em.isOpen()) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            em.close();
+        }
+    }
+
+    public void commit() {
+        if (em != null && em.isOpen()) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().commit();
+            }
+            em.close();
+        }
     }
 
     public EntityManager getEm() {
@@ -94,6 +134,34 @@ public class ConnectionDTO {
 
     public void setEm(EntityManager em) {
         this.em = em;
+    }
+
+    public Integer getDbType() {
+        return dbType;
+    }
+
+    public void setDbType(Integer dbType) {
+        this.dbType = dbType;
+    }
+
+    private Map<String, String> getMapByDbType() {
+        Map<String, String> properties = new HashMap<String, String>();
+
+        properties.put("eclipselink.cache.shared.default", "false");
+        properties.put("eclipselink.jdbc.user", nmUser);
+        properties.put("eclipselink.jdbc.password", cdPass);
+
+        if (POSTGRESQL == dbType) {
+            properties.put("eclipselink.target-database", "PostgreSQL");
+            properties.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
+            properties.put("eclipselink.jdbc.url", "jdbc:postgresql://" + nrIp + ":" + nrPort.toString() + "/" + nmDatabase);
+        } else if (MYSQL == dbType) {
+            properties.put("eclipselink.target-database", "MySQL");
+            properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
+            properties.put("eclipselink.jdbc.url", "jdbc:mysql://" + nrIp + ":" + nrPort.toString() + "/" + nmDatabase);
+        }
+
+        return properties;
     }
 
 }

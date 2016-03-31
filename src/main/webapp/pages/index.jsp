@@ -14,18 +14,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="stylesheet" href="assets/bootstrap-3.3.5/css/bootstrap.min.css">
             <link rel="stylesheet" href="assets/bootstrap-3.3.5/css/bootstrap-theme.min.css">
-
-            <style>
-                body {
-                    padding-top: 50px;
-                    padding-bottom: 20px;
-                }
-                .input-group > span {
-                    min-width: 140px;
-                    text-align: right;
-                }
-            </style>
-
+            <link rel="stylesheet" href="assets/others.css">
         </head>
         <body>
             <input type="hidden" id="url" value="<%=request.getContextPath()%>"/>
@@ -47,15 +36,25 @@
             <div class="jumbotron">
                 <div class="container">
                     <div class="row">
+
+                        <!-- ---------------- MESSAGES ---------------- -->
+                        <div id="message-div" class="col-md-12"></div>
+
                         <!-- ---------------- COFIGURAÇÕES ---------------- -->
                         <div class="col-md-12" >
                             <s:form id="connectionForm" namespace="/" action="index" cssClass="form-horizontal" method="post" theme="simple">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                    <div class="panel-heading" style="padding: 2px 30px;">
                                         <h4 class="panel-title">
-                                            <label style='margin-bottom: 0px;'>
-                                                <span class="glyphicon glyphicon-cog"></span> Configure a connection
+                                            <label style='margin-bottom: 0px; padding-top: 8px; padding-bottom: 7px;'>
+                                                <span class="glyphicon glyphicon-cog"></span> Configure a host connection
                                             </label>
+                                            <span class="pull-right">
+                                                <select name="dbType" class="form-control">
+                                                    <option value="1">PostgresSql</option>
+                                                    <option value="2">MySql</option>
+                                                </select>
+                                            </span>
                                         </h4>
                                     </div>
                                     <div class="panel-body">
@@ -113,40 +112,14 @@
                         <!-- ---------------- FIM COFIGURAÇÕES ---------------- -->
 
 
-                        <!-- ---------------- DASHBOARD ---------------- -->
-                        <div class="col-md-12" >
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <label style='margin-bottom: 0px;'>
-                                            <span class="glyphicon glyphicon-dashboard"></span> Dashboard 
-                                        </label>
-                                        <%-- <label class="pull-right">Last Update: <small> <s:date name="dtLastUpdate" format="dd/MM/yyyy HH:MM:ss"/></small></label> --%>
-                                    </h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="col-md-6">
-                                        <div id="memoryGraph" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div id="diskGraph" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- ---------------- FIM DASHBOARD ---------------- -->
-
-
-                        <!-- ---------------- SOFWTARES ---------------- -->
+                        <!-- ---------------- MAPPING ---------------- -->
                         <div class="col-md-12" >
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                             <label style='margin-bottom: 0px; width: 100%; cursor: pointer;'>
-                                                <span class="glyphicon glyphicon-th-list"></span> Softwares and Aplications Installed
-                                                <span class="pull-right">Total: <small> <s:property value="snmpDTO.softwares.size()"/></small></span>
+                                                <span class="glyphicon glyphicon-th-list"></span> Integration Map
                                             </label>
                                         </a>
                                     </h4>
@@ -187,6 +160,7 @@
 
             <script>window.jQuery || document.write('<script src="assets/jquery/jquery-1.11.3.min.js"><\/script>')</script>
             <script src="assets/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+            <script src="assets/jquery.blockUI.min.js"></script>
             <script src="assets/main.js"></script>
         </body>
     </html>
