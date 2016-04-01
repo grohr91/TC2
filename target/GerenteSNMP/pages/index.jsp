@@ -50,7 +50,7 @@
                                                 <span class="glyphicon glyphicon-cog"></span> Configure a host connection
                                             </label>
                                             <span class="pull-right">
-                                                <select name="dbType" class="form-control">
+                                                <select name="connection.dbType" class="form-control">
                                                     <option value="1">PostgresSql</option>
                                                     <option value="2">MySql</option>
                                                 </select>

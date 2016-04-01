@@ -1,6 +1,7 @@
 package br.unisc.dto;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,6 +22,8 @@ public class ConnectionDTO {
     private String nmUser;
     private String cdPass;
     private Integer dbType;
+    private LinkedHashMap tableList;
+    private LinkedHashMap columnList;
 
     private static final int POSTGRESQL = 1;
     private static final int MYSQL = 2;
@@ -148,20 +151,35 @@ public class ConnectionDTO {
         Map<String, String> properties = new HashMap<String, String>();
 
         properties.put("eclipselink.cache.shared.default", "false");
-        properties.put("eclipselink.jdbc.user", nmUser);
-        properties.put("eclipselink.jdbc.password", cdPass);
+        properties.put("javax.persistence.jdbc.user", nmUser);
+        properties.put("javax.persistence.jdbc.password", cdPass);
 
         if (POSTGRESQL == dbType) {
             properties.put("eclipselink.target-database", "PostgreSQL");
             properties.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
-            properties.put("eclipselink.jdbc.url", "jdbc:postgresql://" + nrIp + ":" + nrPort.toString() + "/" + nmDatabase);
+            properties.put("javax.persistence.jdbc.url", "jdbc:postgresql://" + nrIp + ":" + nrPort.toString() + "/" + nmDatabase);
         } else if (MYSQL == dbType) {
             properties.put("eclipselink.target-database", "MySQL");
             properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
-            properties.put("eclipselink.jdbc.url", "jdbc:mysql://" + nrIp + ":" + nrPort.toString() + "/" + nmDatabase);
+            properties.put("javax.persistence.jdbc.url", "jdbc:mysql://" + nrIp + ":" + nrPort.toString() + "/" + nmDatabase);
         }
 
         return properties;
     }
 
+    public LinkedHashMap getTableList() {
+        return tableList;
+    }
+
+    public void setTableList(LinkedHashMap tableList) {
+        this.tableList = tableList;
+    }
+
+    public LinkedHashMap getColumnList() {
+        return columnList;
+    }
+
+    public void setColumnList(LinkedHashMap columnList) {
+        this.columnList = columnList;
+    }
 }
