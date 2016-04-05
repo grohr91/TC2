@@ -22,8 +22,6 @@ public class ConnectionDTO {
     private String nmUser;
     private String cdPass;
     private Integer dbType;
-    private LinkedHashMap tableList;
-    private LinkedHashMap columnList;
 
     private static final int POSTGRESQL = 1;
     private static final int MYSQL = 2;
@@ -102,7 +100,7 @@ public class ConnectionDTO {
         }
         Map<String, String> properties = getMapByDbType();
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersistenceTcc", properties);
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersistenceOthersUnit", properties);
             em = emf.createEntityManager();
             em.getTransaction().begin();
         } catch (Exception ex) {
@@ -167,19 +165,4 @@ public class ConnectionDTO {
         return properties;
     }
 
-    public LinkedHashMap getTableList() {
-        return tableList;
-    }
-
-    public void setTableList(LinkedHashMap tableList) {
-        this.tableList = tableList;
-    }
-
-    public LinkedHashMap getColumnList() {
-        return columnList;
-    }
-
-    public void setColumnList(LinkedHashMap columnList) {
-        this.columnList = columnList;
-    }
 }

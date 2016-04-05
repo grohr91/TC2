@@ -13,13 +13,25 @@ function clearForm(formId) {
 
 function testConnection() {
     $.ajax({
-        url: $("#url").val() + "/TC2/testConnection",
+        url: $("#url").val() + "/testConnection",
         data: $("#connectionForm").serialize()
     }).done(function (data) {
         if (data.dsMessage == null || data.dsMessage == "") {
             $("#message-div").empty().append(
                     "<div class='alert alert-success' role='alert'>"
                     + "Connection OK</div>");
+        } else {
+            $("#message-div").empty().append(data.dsMessage);
+        }
+    });
+}
+
+function loadFields() {
+    $.ajax({
+        url: $("#url").val() + "/loadDatabase",
+    }).done(function (data) {
+        if (data.dsMessage == null || data.dsMessage == "") {
+            $(".integration-panel").empty().append(data);
         } else {
             $("#message-div").empty().append(data.dsMessage);
         }

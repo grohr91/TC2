@@ -1,15 +1,21 @@
 package br.unisc.action;
 
+import br.unisc.controller.SchemaDTOController;
 import br.unisc.dto.ConnectionDTO;
+import br.unisc.dto.SchemaDTO;
+import br.unisc.util.EMAware;
 import com.opensymphony.xwork2.ActionSupport;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author m68663 - Guilherme Rohr
  */
-public class ConfigurationAction extends ActionSupport {
+public class ConfigurationAction extends ActionSupport implements EMAware {
 
+    private EntityManager em;
     private ConnectionDTO connection;
+    private SchemaDTO schema;
     private String dsMessage;
 
     public String main() throws Exception {
@@ -38,6 +44,23 @@ public class ConfigurationAction extends ActionSupport {
         return SUCCESS;
     }
 
+    public String loadDatabase() {
+        try {
+            dsMessage = connection.open();
+            //passa conexão do BD TC2
+            SchemaDTOController schemaDTOController = new SchemaDTOController(null);
+            //busca nomes de todas tabelas do BD
+            schema = schemaDTOController.loadByNmSchema("TC2");
+
+            connection.close();
+            return SUCCESS;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            dsMessage = "Something wrong occoured";
+        }
+        return ERROR;
+    }
+
     public ConnectionDTO getConnection() {
         return connection;
     }
@@ -56,6 +79,18 @@ public class ConfigurationAction extends ActionSupport {
 
     public void setDsMessage(String dsMessage) {
         this.dsMessage = dsMessage;
+    }
+
+    public SchemaDTO getSchema() {
+        return schema;
+    }
+
+    public void setSchema(SchemaDTO schema) {
+        this.schema = schema;
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
 
 }

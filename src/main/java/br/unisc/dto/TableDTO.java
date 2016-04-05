@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
  *
  * @author Guilherme Rohr - m68663
  */
-class TableDTO {
+public class TableDTO {
 
     private String nmTable;
     private LinkedHashMap<Integer, String> columns;
@@ -20,16 +20,20 @@ class TableDTO {
         this.nmTable = nm;
     }
 
-    public LinkedHashMap<Integer, String> getColumns() {
-        return columns;
-    }
-
     public String getNmTable() {
         return nmTable;
     }
 
     public void setNmTable(String nmTable) {
         this.nmTable = nmTable;
+    }
+
+    public LinkedHashMap<Integer, String> getColumns() {
+        return columns;
+    }
+
+    public void setColumns(LinkedHashMap<Integer, String> columns) {
+        this.columns = columns;
     }
 
 }

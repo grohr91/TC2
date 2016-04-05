@@ -9,6 +9,16 @@
     <constant name="struts.devMode" value="true" />
 	
     <package name="default" namespace="/" extends="struts-default, json-default">
+        
+        <interceptors>
+            <interceptor class="br.unisc.util.JPAInterceptor" name="jpa"/>
+            <interceptor-stack name="jpaStack">
+                <interceptor-ref name="jpa"/>
+                <interceptor-ref name="params"/>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="jpaStack"/>
+        
         <action name="">
             <result name="success" type="redirectAction">
                 <param name="actionName">index</param>
@@ -28,6 +38,14 @@
             </result>
         </action>
         
+        <action name="loadDatabase" method="loadDatabase" class="br.unisc.action.ConfigurationAction">
+            <result name="success">/pages/table-list.jsp</result>
+            <result name="error" type="json">
+                <param name="includeProperties">
+                    ^dsMessage
+                </param>
+            </result>
+        </action>
     </package>
 	
 </struts>

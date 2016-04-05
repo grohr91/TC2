@@ -20,11 +20,8 @@ public class SchemaDTO {
     private String nmSchema;
     private LinkedHashMap<Integer, TableDTO> tableList;
 
-    public SchemaDTO(EntityManager em, String nmSchema) {
+    public SchemaDTO(String nmSchema) {
         this.nmSchema = nmSchema;
-        //busca nomes de todas tabelas do BD
-        loadDBTable();
-
     }
 
     public LinkedHashMap<Integer, TableDTO> getTableList() {
@@ -41,22 +38,6 @@ public class SchemaDTO {
 
     public void setNmSchema(String nmSchema) {
         this.nmSchema = nmSchema;
-    }
-
-    private void loadDBTable() {
-        Query q = em.createNamedQuery("select * "
-                + "from information_schema.tables "
-                + "where TABLE_SCHEMA = ?1 "
-                + "order by table_name ");
-        q.setParameter(1, nmSchema);
-        List<Object[]> result = q.getResultList();
-
-        tableList = new LinkedHashMap<Integer, TableDTO>();
-        int i = 0;
-        for (Object o[] : result) {
-            TableDTO t = new TableDTO(o[0].toString());
-            tableList.put(i++, t);
-        }
     }
 
 }

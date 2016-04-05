@@ -102,9 +102,9 @@
                                     </div>
 
                                     <div class="panel-footer text-right">
-                                        <a class="btn btn-default" onclick="clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
-                                        <a class="btn btn-default" onclick="testConnection();"><i class="glyphicon glyphicon-play"></i> Test Connection</a>
-                                        <a class="btn btn-primary" onclick="saveModifications();"><i class="glyphicon glyphicon-log-in"></i> Save Modifications</a>
+                                        <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
+                                        <a class="btn btn-default" href="javascript:testConnection();"><i class="glyphicon glyphicon-play"></i> Test Connection</a>
+                                        <a class="btn btn-primary" href="javascript:loadFields();"><i class="glyphicon glyphicon-log-in"></i> Save Modifications</a>
                                     </div>
                                 </div>
                             </s:form>
@@ -125,12 +125,8 @@
                                     </h4>
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                    <div class="panel-body">
-                                        <ul class="list-group">
-                                            <s:iterator value="snmpDTO.softwares">
-                                                <li class="list-group-item"><s:property /> </li>
-                                                </s:iterator>
-                                        </ul>
+                                    <div class="panel-body integration-panel">
+                                        
                                     </div>
                                 </div>
                             </div>
