@@ -14,6 +14,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="stylesheet" href="assets/bootstrap-3.3.5/css/bootstrap.min.css">
             <link rel="stylesheet" href="assets/bootstrap-3.3.5/css/bootstrap-theme.min.css">
+            <link rel="stylesheet" href="assets/bootstrap-vertical-tabs/bootstrap.vertical-tabs.min.css">
             <link rel="stylesheet" href="assets/others.css">
         </head>
         <body>
@@ -104,7 +105,7 @@
                                     <div class="panel-footer text-right">
                                         <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
                                         <a class="btn btn-default" href="javascript:testConnection();"><i class="glyphicon glyphicon-play"></i> Test Connection</a>
-                                        <a class="btn btn-primary" href="javascript:loadFields();"><i class="glyphicon glyphicon-log-in"></i> Save Modifications</a>
+                                        <a class="btn btn-primary" href="javascript:loadFields();"><i class="glyphicon glyphicon-log-in"></i> Load Fields</a>
                                     </div>
                                 </div>
                             </s:form>
@@ -114,22 +115,28 @@
 
                         <!-- ---------------- MAPPING ---------------- -->
                         <div class="col-md-12" >
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            <label style='margin-bottom: 0px; width: 100%; cursor: pointer;'>
-                                                <span class="glyphicon glyphicon-th-list"></span> Integration Map
-                                            </label>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                    <div class="panel-body integration-panel">
-                                        
+                            <s:form id="mappingForm" namespace="/" action="index" cssClass="form-horizontal" method="post" theme="simple">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <label style='margin-bottom: 0px; width: 100%; cursor: pointer;'>
+                                                    <span class="glyphicon glyphicon-th-list"></span> Integration Map
+                                                </label>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body integration-panel">
+                                            <s:action name="loadDatabase"  namespace="/" executeResult="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer text-right">
+                                        <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
+                                        <a class="btn btn-primary" href="javascript:saveMap();"><i class="glyphicon glyphicon-save"></i> Save Mapping</a>
                                     </div>
                                 </div>
-                            </div>
+                            </s:form>
                         </div>
                         <!-- ---------------- FIM SOFWTARES ---------------- -->
 

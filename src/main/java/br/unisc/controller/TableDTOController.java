@@ -24,7 +24,7 @@ public class TableDTOController  {
     }
 
     public LinkedHashMap<Integer, TableDTO> findTableByNmSchema(String nmSchema) {
-        Query q = em.createNamedQuery("select * "
+        Query q = em.createNativeQuery("select * "
                 + "from information_schema.tables "
                 + "where TABLE_SCHEMA = ?1 "
                 + "order by table_name ");
@@ -35,15 +35,15 @@ public class TableDTOController  {
 
         int i = 0;
         for (Object o[] : result) {
-            TableDTO t = new TableDTO(o[0].toString());
-            t.setColumns(findColumnByNmTable(t.getNmTable()));
+            TableDTO t = new TableDTO(o[2].toString());
+            t.setColumnList(findColumnByNmTable(t.getNmTable()));
             tableList.put(i++, t);
         }
         return tableList;
     }
 
     public LinkedHashMap<Integer, String> findColumnByNmTable(String nmTable) {
-        Query q = em.createNamedQuery("SELECT COLUMN_NAME from information_schema.COLUMNS "
+        Query q = em.createNativeQuery("SELECT COLUMN_NAME from information_schema.COLUMNS "
                 + "WHERE TABLE_NAME = ?1 "
                 + "ORDER BY COLUMN_KEY = 'PRI' DESC, COLUMN_NAME");
         q.setParameter(1, nmTable);

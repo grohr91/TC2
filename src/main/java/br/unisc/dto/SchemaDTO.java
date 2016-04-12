@@ -6,9 +6,6 @@
 package br.unisc.dto;
 
 import java.util.LinkedHashMap;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 /**
  *
@@ -16,7 +13,6 @@ import javax.persistence.Query;
  */
 public class SchemaDTO {
 
-    private EntityManager em;
     private String nmSchema;
     private LinkedHashMap<Integer, TableDTO> tableList;
 

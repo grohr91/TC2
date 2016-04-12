@@ -1,10 +1,13 @@
 package br.unisc.action;
 
+import br.com.unisc.model.ConfMapping;
 import br.unisc.controller.SchemaDTOController;
 import br.unisc.dto.ConnectionDTO;
 import br.unisc.dto.SchemaDTO;
 import br.unisc.util.EMAware;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
@@ -17,6 +20,7 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
     private ConnectionDTO connection;
     private SchemaDTO schema;
     private String dsMessage;
+    private List<ConfMapping> mappingList;
 
     public String main() throws Exception {
         try {
@@ -46,13 +50,11 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
 
     public String loadDatabase() {
         try {
-            dsMessage = connection.open();
             //passa conexão do BD TC2
-            SchemaDTOController schemaDTOController = new SchemaDTOController(null);
+            SchemaDTOController schemaDTOController = new SchemaDTOController(em);
             //busca nomes de todas tabelas do BD
-            schema = schemaDTOController.loadByNmSchema("TC2");
-
-            connection.close();
+            schema = schemaDTOController.loadByNmSchema("tc2");
+            mappingList = new ArrayList<ConfMapping>();
             return SUCCESS;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -91,6 +93,14 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
 
     public void setEm(EntityManager em) {
         this.em = em;
+    }
+
+    public List<ConfMapping> getMappingList() {
+        return mappingList;
+    }
+
+    public void setMappingList(List<ConfMapping> mappingList) {
+        this.mappingList = mappingList;
     }
 
 }

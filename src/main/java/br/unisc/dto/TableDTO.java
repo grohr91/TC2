@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 public class TableDTO {
 
     private String nmTable;
-    private LinkedHashMap<Integer, String> columns;
+    private LinkedHashMap<Integer, String> columnList;
 
     public TableDTO(String nm) {
         this.nmTable = nm;
@@ -28,12 +28,14 @@ public class TableDTO {
         this.nmTable = nmTable;
     }
 
-    public LinkedHashMap<Integer, String> getColumns() {
-        return columns;
+    public LinkedHashMap<Integer, String> getColumnList() {
+        return columnList;
     }
 
-    public void setColumns(LinkedHashMap<Integer, String> columns) {
-        this.columns = columns;
+    public void setColumnList(LinkedHashMap<Integer, String> columnList) {
+        this.columnList = columnList;
     }
+
+    
 
 }
