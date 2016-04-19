@@ -1,6 +1,8 @@
 package br.unisc.controller;
 
+import br.com.unisc.model.ConfMap;
 import br.com.unisc.model.ConfMapping;
+import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
@@ -19,6 +21,11 @@ public class ConfMappingController {
         em.persist(confMapping);
         em.flush();
         return confMapping;
+    }
+
+    public List<ConfMap> findAll() {
+        return em.createNamedQuery("ConfMap.findAll", ConfMap.class)
+                .getResultList();
     }
 
 }

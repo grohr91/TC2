@@ -1,6 +1,8 @@
 package br.unisc.action;
 
+import br.com.unisc.model.ConfMap;
 import br.com.unisc.model.ConfMapping;
+import br.unisc.controller.ConfMappingController;
 import br.unisc.controller.SchemaDTOController;
 import br.unisc.dto.ConnectionDTO;
 import br.unisc.dto.SchemaDTO;
@@ -19,20 +21,25 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
     private EntityManager em;
     private ConnectionDTO connection;
     private SchemaDTO schema;
+    private SchemaDTO schemaExport;
     private String dsMessage;
-    private List<ConfMapping> mappingList;
+    private List<ConfMap> confMapList;
+    private List<ConfMapping> confMappingList;
 
     public String main() throws Exception {
         try {
             connection = new ConnectionDTO();
             connection.setNrIp("127.0.0.1");
-            connection.setNrPort(3306);
-            connection.setNmDatabase("tc2");
-            connection.setNmUser("root");
-            connection.setCdPass("root");
+            connection.setNrPort(5432);
+            connection.setNmDatabase("ideatennis");
+            connection.setNmUser("postgres");
+            connection.setCdPass("postgres");
             connection.setNmService("");
+            confMapList = new ConfMappingController(em).findAll();
+            confMapList.add(new ConfMap(0, "New One"));
         } catch (Exception ex) {
             ex.printStackTrace();
+            confMapList = new ArrayList<ConfMap>();
         }
         return SUCCESS;
     }
@@ -52,9 +59,14 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
         try {
             //passa conexão do BD TC2
             SchemaDTOController schemaDTOController = new SchemaDTOController(em);
+            
             //busca nomes de todas tabelas do BD
-            schema = schemaDTOController.loadByNmSchema("tc2");
-            mappingList = new ArrayList<ConfMapping>();
+            schema = schemaDTOController.loadByNmSchema("tc2", ConnectionDTO.MYSQL);
+            confMappingList = new ArrayList<ConfMapping>();
+            
+            //busca nomes de todas tabelas do BD configurado
+            schemaExport = schemaDTOController.loadByNmSchema(
+                    connection.getNmDatabase(), connection.getDbType());
             return SUCCESS;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -95,12 +107,28 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
         this.em = em;
     }
 
-    public List<ConfMapping> getMappingList() {
-        return mappingList;
+    public List<ConfMap> getConfMapList() {
+        return confMapList;
     }
 
-    public void setMappingList(List<ConfMapping> mappingList) {
-        this.mappingList = mappingList;
+    public void setConfMapList(List<ConfMap> confMapList) {
+        this.confMapList = confMapList;
+    }
+
+    public List<ConfMapping> getConfMappingList() {
+        return confMappingList;
+    }
+
+    public void setConfMappingList(List<ConfMapping> confMappingList) {
+        this.confMappingList = confMappingList;
+    }
+
+    public SchemaDTO getSchemaExport() {
+        return schemaExport;
+    }
+
+    public void setSchemaExport(SchemaDTO schemaExport) {
+        this.schemaExport = schemaExport;
     }
 
 }

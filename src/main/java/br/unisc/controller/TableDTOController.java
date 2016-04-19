@@ -5,7 +5,10 @@
  */
 package br.unisc.controller;
 
+import br.unisc.dto.ConnectionDTO;
+import br.unisc.dto.SchemaDTO;
 import br.unisc.dto.TableDTO;
+import br.unisc.util.DatabaseAware;
 import java.util.LinkedHashMap;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,37 +18,42 @@ import javax.persistence.Query;
  *
  * @author m68663 - Guilherme Rohr
  */
-public class TableDTOController  {
+public class TableDTOController implements DatabaseAware {
 
     protected EntityManager em;
-    
+
     public TableDTOController(EntityManager em) {
         this.em = em;
     }
 
-    public LinkedHashMap<Integer, TableDTO> findTableByNmSchema(String nmSchema) {
-        Query q = em.createNativeQuery("select * "
-                + "from information_schema.tables "
-                + "where TABLE_SCHEMA = ?1 "
-                + "order by table_name ");
-        q.setParameter(1, nmSchema);
+    public LinkedHashMap<Integer, TableDTO> findTableBySchema(SchemaDTO schema) {
+        Query q = null;
+        if (ConnectionDTO.MYSQL == schema.getDbType()) {
+            q = em.createNativeQuery(MYSQL_TABLES_QUERY);
+        } else {
+            q = em.createNativeQuery(POSTGRES_TABLES_QUERY);
+        }
+        q.setParameter(1, schema.getNmSchema());
         List<Object[]> result = q.getResultList();
 
         LinkedHashMap<Integer, TableDTO> tableList = new LinkedHashMap<Integer, TableDTO>();
 
         int i = 0;
         for (Object o[] : result) {
-            TableDTO t = new TableDTO(o[2].toString());
-            t.setColumnList(findColumnByNmTable(t.getNmTable()));
+            TableDTO t = new TableDTO(o[0].toString());
+            t.setColumnList(findColumnByNmTable(t.getNmTable(), schema.getDbType()));
             tableList.put(i++, t);
         }
         return tableList;
     }
 
-    public LinkedHashMap<Integer, String> findColumnByNmTable(String nmTable) {
-        Query q = em.createNativeQuery("SELECT COLUMN_NAME from information_schema.COLUMNS "
-                + "WHERE TABLE_NAME = ?1 "
-                + "ORDER BY COLUMN_KEY = 'PRI' DESC, COLUMN_NAME");
+    public LinkedHashMap<Integer, String> findColumnByNmTable(String nmTable, int dbType) {
+        Query q = null;
+        if (ConnectionDTO.MYSQL == dbType) {
+            q = em.createNativeQuery(MYSQL_TABLE_FIELD_QUERY);
+        } else {
+            q = em.createNativeQuery(POSTGRES_TABLE_FIELD_QUERY);
+        }
         q.setParameter(1, nmTable);
         List<String> result = q.getResultList();
 

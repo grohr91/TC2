@@ -47,9 +47,12 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading" style="padding: 2px 30px;">
                                         <h4 class="panel-title">
-                                            <label style='margin-bottom: 0px; padding-top: 8px; padding-bottom: 7px;'>
-                                                <span class="glyphicon glyphicon-cog"></span> Configure a host connection
-                                            </label>
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseConfig" aria-expanded="true" aria-controls="collapseOne">
+                                                <label style='margin-bottom: 0px; padding-top: 8px; padding-bottom: 7px; cursor: pointer; width: 50%'>
+                                                    <span class="glyphicon glyphicon-cog"></span> Configure a host connection
+                                                </label>
+                                            </a>
+
                                             <span class="pull-right">
                                                 <select name="connection.dbType" class="form-control">
                                                     <option value="1">PostgresSql</option>
@@ -58,54 +61,56 @@
                                             </span>
                                         </h4>
                                     </div>
-                                    <div class="panel-body">
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Host Address</span>
-                                                <s:textfield type="text" id="nrIp" name="connection.nrIp" cssClass="form-control" placeholder="Ex: 127.0.0.1"/>
+                                    <div id="collapseConfig" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Host Address</span>
+                                                    <s:textfield type="text" id="nrIp" name="connection.nrIp" cssClass="form-control" placeholder="Ex: 127.0.0.1"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Port</span>
+                                                    <s:textfield type="text" id="nrPort" name="connection.nrPort" cssClass="form-control" placeholder="Ex: 5432"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Service</span>
+                                                    <s:textfield type="text" id="nmService" name="connection.nmService" cssClass="form-control"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Database</span>
+                                                    <s:textfield type="text" id="nmDatabase" name="connection.nmDatabase" cssClass="form-control" placeholder="Database name"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Usename</span>
+                                                    <s:textfield type="text" id="nmUser" name="connection.nmUser" cssClass="form-control" placeholder="Ex: root"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Password</span>
+                                                    <s:password id="cdPass" name="connection.cdPass" cssClass="form-control" placeholder="Ex: myP@ssword"/>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Port</span>
-                                                <s:textfield type="text" id="nrPort" name="connection.nrPort" cssClass="form-control" placeholder="Ex: 5432"/>
-                                            </div>
+                                        <div class="panel-footer text-right">
+                                            <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
+                                            <a class="btn btn-default" href="javascript:testConnection();"><i class="glyphicon glyphicon-play"></i> Test Connection</a>
+                                            <a class="btn btn-primary" href="javascript:loadFields();"><i class="glyphicon glyphicon-log-in"></i> Load Fields</a>
                                         </div>
-
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Service</span>
-                                                <s:textfield type="text" id="nmService" name="connection.nmService" cssClass="form-control"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Database</span>
-                                                <s:textfield type="text" id="nmDatabase" name="connection.nmDatabase" cssClass="form-control" placeholder="Database name"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Usename</span>
-                                                <s:textfield type="text" id="nmUser" name="connection.nmUser" cssClass="form-control" placeholder="Ex: root"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Password</span>
-                                                <s:password id="cdPass" name="connection.cdPass" cssClass="form-control" placeholder="Ex: myP@ssword"/>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="panel-footer text-right">
-                                        <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
-                                        <a class="btn btn-default" href="javascript:testConnection();"><i class="glyphicon glyphicon-play"></i> Test Connection</a>
-                                        <a class="btn btn-primary" href="javascript:loadFields();"><i class="glyphicon glyphicon-log-in"></i> Load Fields</a>
                                     </div>
                                 </div>
                             </s:form>
@@ -117,23 +122,31 @@
                         <div class="col-md-12" >
                             <s:form id="mappingForm" namespace="/" action="index" cssClass="form-horizontal" method="post" theme="simple">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                    <div class="panel-heading" style="padding: 2px 30px;">
                                         <h4 class="panel-title">
                                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                <label style='margin-bottom: 0px; width: 100%; cursor: pointer;'>
+                                                <label style="margin-bottom: 0px; padding-top: 8px; padding-bottom: 7px; cursor: pointer; width: 50%">
                                                     <span class="glyphicon glyphicon-th-list"></span> Integration Map
                                                 </label>
                                             </a>
+                                            <span class="pull-right">
+                                                <s:select cssClass="form-control" 
+                                                          list="confMapList"
+                                                          listKey="idMap"
+                                                          listValue="nmMap"
+                                                          emptyOption="true"
+                                                          />
+                                            </span>
                                         </h4>
                                     </div>
                                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                         <div class="panel-body integration-panel">
                                             <s:action name="loadDatabase"  namespace="/" executeResult="true"/>
                                         </div>
-                                    </div>
-                                    <div class="panel-footer text-right">
-                                        <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
-                                        <a class="btn btn-primary" href="javascript:saveMap();"><i class="glyphicon glyphicon-save"></i> Save Mapping</a>
+                                        <div class="panel-footer text-right">
+                                            <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
+                                            <a class="btn btn-primary" href="javascript:saveMap();"><i class="glyphicon glyphicon-save"></i> Save Mapping</a>
+                                        </div>
                                     </div>
                                 </div>
                             </s:form>

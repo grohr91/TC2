@@ -1,7 +1,7 @@
 package br.unisc.dto;
 
+import br.unisc.util.DatabaseAware;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
  *
  * @author m68663 - Guilherme Rohr
  */
-public class ConnectionDTO {
+public class ConnectionDTO  implements DatabaseAware{
 
     private EntityManager em;
 
@@ -23,8 +23,6 @@ public class ConnectionDTO {
     private String cdPass;
     private Integer dbType;
 
-    private static final int POSTGRESQL = 1;
-    private static final int MYSQL = 2;
 
     public String getNrIp() {
         return nrIp;

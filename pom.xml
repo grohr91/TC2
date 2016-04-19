@@ -49,6 +49,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>GerenteSNMP</finalName>
+        <finalName>TC2</finalName>
     </build>
 </project>

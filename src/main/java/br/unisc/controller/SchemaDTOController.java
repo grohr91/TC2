@@ -10,17 +10,18 @@ import javax.persistence.EntityManager;
 public class SchemaDTOController {
 
     protected EntityManager em;
+    
 
     public SchemaDTOController(EntityManager em) {
         this.em = em;
     }
 
-    public SchemaDTO loadByNmSchema(String nmSchema) {
-        SchemaDTO schema = new SchemaDTO(nmSchema);
+    public SchemaDTO loadByNmSchema(String nmSchema, int dbType) {
+        SchemaDTO schema = new SchemaDTO(nmSchema, dbType);
 
         TableDTOController tableDTOController = new TableDTOController(em);
         schema.setTableList(
-                tableDTOController.findTableByNmSchema(nmSchema));
+                tableDTOController.findTableBySchema(schema));
 
         return schema;
     }

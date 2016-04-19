@@ -14,10 +14,15 @@ import java.util.LinkedHashMap;
 public class SchemaDTO {
 
     private String nmSchema;
+    private int dbType;
     private LinkedHashMap<Integer, TableDTO> tableList;
 
-    public SchemaDTO(String nmSchema) {
+    public static final int POSTGRESQL = 0;
+    public static final int MYSQL = 1;
+
+    public SchemaDTO(String nmSchema, int dbType) {
         this.nmSchema = nmSchema;
+        this.dbType = dbType;
     }
 
     public LinkedHashMap<Integer, TableDTO> getTableList() {
@@ -34,6 +39,14 @@ public class SchemaDTO {
 
     public void setNmSchema(String nmSchema) {
         this.nmSchema = nmSchema;
+    }
+
+    public int getDbType() {
+        return dbType;
+    }
+
+    public void setDbType(int dbType) {
+        this.dbType = dbType;
     }
 
 }

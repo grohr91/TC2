@@ -38,6 +38,9 @@ public class ConfMapping implements Serializable {
     @Column(name = "id_mapping")
     private Integer idMapping;
     @Basic(optional = false)
+    @Column(name = "nm_table_source")
+    private String nmTableSource;
+    @Basic(optional = false)
     @Column(name = "nm_field_source")
     private String nmFieldSource;
     @Basic(optional = false)
@@ -99,6 +102,14 @@ public class ConfMapping implements Serializable {
         return hash;
     }
 
+    public String getNmTableSource() {
+        return nmTableSource;
+    }
+
+    public void setNmTableSource(String nmTableSource) {
+        this.nmTableSource = nmTableSource;
+    }
+
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -116,5 +127,5 @@ public class ConfMapping implements Serializable {
     public String toString() {
         return "br.com.unisc.model.ConfMapping[ idMapping=" + idMapping + " ]";
     }
-    
+
 }

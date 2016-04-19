@@ -26,7 +26,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "conf_map")
 @NamedQueries({
-    @NamedQuery(name = "ConfMap.findAll", query = "SELECT c FROM ConfMap c"),
+    @NamedQuery(name = "ConfMap.findAll", query = "SELECT c FROM ConfMap c ORDER BY c.nmMap"),
     @NamedQuery(name = "ConfMap.findByIdMap", query = "SELECT c FROM ConfMap c WHERE c.idMap = :idMap"),
     @NamedQuery(name = "ConfMap.findByNmMap", query = "SELECT c FROM ConfMap c WHERE c.nmMap = :nmMap")})
 public class ConfMap implements Serializable {

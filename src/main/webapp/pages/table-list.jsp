@@ -26,8 +26,23 @@
                 <s:iterator value="value" status="status">
                     <s:iterator value="columnList">
                         <div class="input-group" style="width: 100%">
+
+                            <s:select name="mappingList[%{counter}].tableSource"
+                                      list="schemaExport.tableList"
+                                      listKey="key"
+                                      listValue="value"
+                                      cssClass="form-control" 
+                                      cssStyle="widht: 50%"/>
+                            
+                            <%-- TODO: CRIAR NOVA ACTION QUE RECEBE TABELA E CAMPO SELECIONADO e carregar list de campos da respectiva tabela --%>
+                            <s:select name="mappingList[%{counter}].fieldSource"
+                                      list="schemaExport.tableList"
+                                      listKey="key"
+                                      listValue="value"
+                                      cssClass="form-control" 
+                                      cssStyle="widht: 50%"/>
                             <s:textfield type="text" name="mappingList[%{counter}].fieldSource" 
-                                         cssClass="form-control" 
+                                         cssClass="form-control" cssStyle="width: 50%"
                                          placeholder="Ex: table_name.field_name"/>
                             <span class="input-group-addon" style="width: 230px;">
                                 <s:property value="value"/>
