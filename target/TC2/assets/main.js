@@ -14,30 +14,30 @@ function clearForm(formId) {
     }
 }
 
-function testConnection() {
-    $.ajax({
-        url: $("#url").val() + "/testConnection",
-        data: $("#connectionForm").serialize()
-    }).done(function (data) {
-        if (data.dsMessage == null || data.dsMessage == "") {
-            $("#message-div").empty().append(
-                    "<div class='alert alert-success' role='alert'>"
-                    + "Connection OK</div>");
-        } else {
-            $("#message-div").empty().append(data.dsMessage);
-        }
-    });
-}
-
-function loadFields() {
-    alert("TODO: load fields from database connction");
+//function testConnection() {
 //    $.ajax({
-//        url: $("#url").val() + "/loadDatabase",
+//        url: $("#url").val() + "/testConnection",
+//        data: $("#connectionForm").serialize()
 //    }).done(function (data) {
 //        if (data.dsMessage == null || data.dsMessage == "") {
-//            $(".integration-panel").empty().append(data);
+//            $("#message-div").empty().append(
+//                    "<div class='alert alert-success' role='alert'>"
+//                    + "Connection OK</div>");
 //        } else {
 //            $("#message-div").empty().append(data.dsMessage);
 //        }
 //    });
+//}
+
+function loadFields() {
+    $.ajax({
+        url: $("#url").val() + "/loadDatabase",
+        data: $("#connectionForm").serialize(),
+    }).done(function (data) {
+        if (data.dsMessage == null || data.dsMessage == "") {
+            $(".integration-panel").empty().append(data);
+        } else {
+            $("#message-div").empty().append(data.dsMessage);
+        }
+    });
 }

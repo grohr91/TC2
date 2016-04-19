@@ -34,13 +34,13 @@ public class TableDTOController implements DatabaseAware {
             q = em.createNativeQuery(POSTGRES_TABLES_QUERY);
         }
         q.setParameter(1, schema.getNmSchema());
-        List<Object[]> result = q.getResultList();
+        List<Object> result = q.getResultList();
 
         LinkedHashMap<Integer, TableDTO> tableList = new LinkedHashMap<Integer, TableDTO>();
 
         int i = 0;
-        for (Object o[] : result) {
-            TableDTO t = new TableDTO(o[0].toString());
+        for (Object o : result) {
+            TableDTO t = new TableDTO(o.toString());
             t.setColumnList(findColumnByNmTable(t.getNmTable(), schema.getDbType()));
             tableList.put(i++, t);
         }

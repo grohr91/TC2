@@ -11,18 +11,17 @@ import javax.persistence.Persistence;
  *
  * @author m68663 - Guilherme Rohr
  */
-public class ConnectionDTO  implements DatabaseAware{
+public class ConnectionDTO implements DatabaseAware {
 
     private EntityManager em;
 
     private String nrIp;
     private Integer nrPort;
-    private String nmService;
+    private String nmSchema;
     private String nmDatabase;
     private String nmUser;
     private String cdPass;
     private Integer dbType;
-
 
     public String getNrIp() {
         return nrIp;
@@ -40,12 +39,12 @@ public class ConnectionDTO  implements DatabaseAware{
         this.nrPort = nrPort;
     }
 
-    public String getNmService() {
-        return nmService;
+    public String getNmSchema() {
+        return nmSchema;
     }
 
-    public void setNmService(String nmService) {
-        this.nmService = nmService;
+    public void setNmSchema(String nmSchema) {
+        this.nmSchema = nmSchema;
     }
 
     public String getNmDatabase() {

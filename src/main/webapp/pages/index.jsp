@@ -79,8 +79,8 @@
 
                                             <div class="col-md-6">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">Service</span>
-                                                    <s:textfield type="text" id="nmService" name="connection.nmService" cssClass="form-control"/>
+                                                    <span class="input-group-addon">Schema</span>
+                                                    <s:textfield type="text" id="nmSchema" name="connection.nmSchema" cssClass="form-control"/>
                                                 </div>
                                             </div>
 
@@ -108,7 +108,7 @@
 
                                         <div class="panel-footer text-right">
                                             <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
-                                            <a class="btn btn-default" href="javascript:testConnection();"><i class="glyphicon glyphicon-play"></i> Test Connection</a>
+                                            <!--<a class="btn btn-default" href="javascript:testConnection();"><i class="glyphicon glyphicon-play"></i> Test Connection</a>-->
                                             <a class="btn btn-primary" href="javascript:loadFields();"><i class="glyphicon glyphicon-log-in"></i> Load Fields</a>
                                         </div>
                                     </div>
@@ -141,7 +141,7 @@
                                     </div>
                                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                         <div class="panel-body integration-panel">
-                                            <s:action name="loadDatabase"  namespace="/" executeResult="true"/>
+                                            <%--<s:action name="loadDatabase"  namespace="/" executeResult="true"/>--%>
                                         </div>
                                         <div class="panel-footer text-right">
                                             <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
