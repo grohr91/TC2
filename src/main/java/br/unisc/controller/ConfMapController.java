@@ -14,8 +14,17 @@ public class ConfMapController {
     public ConfMapController(EntityManager em) {
         this.em = em;
     }
-    
-    public ConfMap save(ConfMap confMap){
+
+    public ConfMap save(ConfMap confMap) {
+        if (confMap.getIdMap() != null) {
+            if (confMap.getIdMap().equals(0)) {
+                confMap.setIdMap(null);
+            } else {
+                new ConfMappingController(em).removeAllByConfMapp(confMap.getIdMap());
+                confMap.setConfMappingList(null);
+            }
+        }
+
         em.persist(confMap);
         em.flush();
         return confMap;

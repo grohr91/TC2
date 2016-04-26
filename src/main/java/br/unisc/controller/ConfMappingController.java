@@ -4,6 +4,7 @@ import br.com.unisc.model.ConfMap;
 import br.com.unisc.model.ConfMapping;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +27,22 @@ public class ConfMappingController {
     public List<ConfMap> findAll() {
         return em.createNamedQuery("ConfMap.findAll", ConfMap.class)
                 .getResultList();
+    }
+
+    public List<ConfMapping> saveList(List<ConfMapping> mappingList, ConfMap confMap) {
+        for (ConfMapping cm: mappingList){
+            cm.setConfMap(confMap);
+        }
+        
+        return mappingList;
+    }
+
+    public void removeAllByConfMapp(Integer idMap) {
+        Query q = em.createNativeQuery("DELETE FROM conf_mapping "
+                + "WHERE id_map = ?1");
+        q.setParameter(1, idMap);
+        q.executeUpdate();
+        em.flush();
     }
 
 }

@@ -40,7 +40,7 @@ public class ConfMap implements Serializable {
     @Basic(optional = false)
     @Column(name = "nm_map")
     private String nmMap;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMap")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "confMap")
     private List<ConfMapping> confMappingList;
 
     public ConfMap() {

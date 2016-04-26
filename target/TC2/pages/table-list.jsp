@@ -4,7 +4,8 @@
 <!--Menu-->
 <div class="col-md-3">
     <ul class="nav nav-tabs tabs-left">
-        <s:iterator value="schema.tableList" status="st1">
+        <li class="table-info"><a href="#table-info" data-toggle="tab">General Info</a></li>
+            <s:iterator value="schema.tableList" status="st1">
             <!-- Nav tabs -->
             <li>
                 <a href="#table<s:property value="key"/>" data-toggle="tab">
@@ -19,6 +20,16 @@
 <div class="col-md-9">
     <!-- Tab panes -->
     <div class="tab-content">
+        <div class="tab-pane table-info" id="table-info">
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="nmMap">
+                    New Map Name
+                </label>
+                <div class="col-md-5">
+                    <s:textfield id="nmMap" name="confMap.nmMap" cssClass="form-control" maxlength="50" />
+                </div>
+            </div>
+        </div>
         <s:set var="counter" value="0"/>
         <s:iterator value="schema.tableList" status="st2">
             <div class="tab-pane" id="table<s:property value="key"/>">
@@ -28,21 +39,20 @@
                         <div class="input-group" style="width: 100%">
                             <s:select name="mappingList[%{counter}].tableSource"
                                       list="schemaExport.tableList"
-                                      listKey="value"
+                                      listKey="value.nmTable"
                                       listValue="value.nmTable"
                                       cssClass="form-control" 
                                       cssStyle="width: 50%"
-                                      emptyOption="true"/>
+                                      emptyOption="true"
+                                      onchange="loadColumnByNmTable(this);"/>
 
                             <%-- TODO: CRIAR NOVA ACTION QUE RECEBE TABELA E CAMPO SELECIONADO e carregar list de campos da respectiva tabela --%>
                             <%-- ALTERNATIVA: carregar json com estrutura de tabelas e alterar a partir de hiddens de controle --%>
-                            <s:select name="mappingList[%{counter}].fieldSource"
-                                      list="schemaExport.tableList"
-                                      listKey="value"
-                                      listValue="value"
-                                      cssClass="form-control" 
-                                      cssStyle="width: 50%"
-                                      emptyOption="true"/>
+                            <select name="mappingList[${#counter}].fieldSource"
+                                    class="form-control field" 
+                                    style="width: 50%">
+                                <option/>
+                            </select>
                             <span class="input-group-addon" style="width: 230px;">
                                 <s:property value="value"/>
                                 <s:hidden name="mappingList[%{counter}].fieldDest" />

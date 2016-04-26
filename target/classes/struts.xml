@@ -46,6 +46,27 @@
                 </param>
             </result>
         </action>
+        
+        <action name="loadTableByNmTable" method="loadTableByNmTable" class="br.unisc.action.TableAction">
+            <result name="success" type="json">
+                <param name="includeProperties">
+                    ^columnList\[\d+\]
+                </param>
+            </result>
+            <result name="error" type="json">
+                <param name="includeProperties">
+                    ^dsMessage
+                </param>
+            </result>
+        </action>
+        
+        <action name="saveMapping" method="save" class="br.unisc.action.ConfMapAction">
+            <result name="success" type="json">
+                <param name="includeProperties">
+                    ^dsMessage
+                </param>
+            </result>
+        </action>
     </package>
 	
 </struts>

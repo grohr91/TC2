@@ -101,7 +101,7 @@
                                             <div class="col-md-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">Password</span>
-                                                    <s:password id="cdPass" name="connection.cdPass" cssClass="form-control" placeholder="Ex: myP@ssword"/>
+                                                    <s:textfield id="cdPass" name="connection.cdPass" cssClass="form-control" placeholder="Ex: myP@ssword"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -130,11 +130,12 @@
                                                 </label>
                                             </a>
                                             <span class="pull-right">
-                                                <s:select cssClass="form-control" 
+                                                <s:select cssClass="form-control"
+                                                          name="confMap.idMap"
                                                           list="confMapList"
                                                           listKey="idMap"
                                                           listValue="nmMap"
-                                                          emptyOption="true"
+                                                          onchange="toggleNmMapField(this);"
                                                           />
                                             </span>
                                         </h4>

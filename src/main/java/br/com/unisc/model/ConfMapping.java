@@ -48,7 +48,7 @@ public class ConfMapping implements Serializable {
     private String nmFieldDest;
     @JoinColumn(name = "id_map", referencedColumnName = "id_map")
     @ManyToOne(optional = false)
-    private ConfMap idMap;
+    private ConfMap confMap;
 
     public ConfMapping() {
     }
@@ -87,12 +87,12 @@ public class ConfMapping implements Serializable {
         this.nmFieldDest = nmFieldDest;
     }
 
-    public ConfMap getIdMap() {
-        return idMap;
+    public ConfMap getConfMap() {
+        return confMap;
     }
 
-    public void setIdMap(ConfMap idMap) {
-        this.idMap = idMap;
+    public void setConfMap(ConfMap confMap) {
+        this.confMap = confMap;
     }
 
     @Override

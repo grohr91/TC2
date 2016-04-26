@@ -41,3 +41,42 @@ function loadFields() {
         }
     });
 }
+
+
+function loadColumnByNmTable(obj) {
+    $.ajax({
+        url: $("#url").val() + "/loadTableByNmTable",
+        data: {
+            'nmTable': $(obj).val()
+        }
+    }).done(function (data) {
+        if (data.dsMessage == null || data.dsMessage == "") {
+            var combo = $(obj).parent().find('.field');
+            combo.empty();
+            $(data.columnList).each(function (index, column) {
+                combo.append("<option>" + column + "</option>");
+            });
+        } else {
+            $("#message-div").empty().append(data.dsMessage);
+        }
+    });
+}
+
+function toggleNmMapField(obj) {
+    if($(obj).val() == '0') {
+        $(".table-info")
+    }
+}
+
+function saveMapping() {
+    $.ajax({
+        url: $("#url").val() + "/saveMapping",
+        data: $("#mappingForm").serialize()
+    }).done(function (data) {
+        if (data.dsMessage == null || data.dsMessage == "") {
+            alert("Sucesso! Recarregar tela...");
+        } else {
+            $("#message-div").empty().append(data.dsMessage);
+        }
+    });
+}
