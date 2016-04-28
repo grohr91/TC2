@@ -135,7 +135,7 @@
                                                           list="confMapList"
                                                           listKey="idMap"
                                                           listValue="nmMap"
-                                                          onchange="toggleNmMapField(this);"
+                                                          onchange="loadFields();"
                                                           />
                                             </span>
                                         </h4>
@@ -146,7 +146,7 @@
                                         </div>
                                         <div class="panel-footer text-right">
                                             <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
-                                            <a class="btn btn-primary" href="javascript:saveMap();"><i class="glyphicon glyphicon-save"></i> Save Mapping</a>
+                                            <a class="btn btn-primary" href="javascript:saveMapping();"><i class="glyphicon glyphicon-save"></i> Save Mapping</a>
                                         </div>
                                     </div>
                                 </div>

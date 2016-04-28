@@ -25,6 +25,7 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
     private SchemaDTO schema;
     private SchemaDTO schemaExport;
     private String dsMessage;
+    private ConfMap confMap;
     private List<ConfMap> confMapList;
     private List<ConfMapping> confMappingList;
     private Map<String, Object> sessionMap;
@@ -32,14 +33,14 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
     public String main() throws Exception {
         try {
             connection = new ConnectionDTO();
-            connection.setNrIp("127.0.0.1");
-            connection.setNrPort(5432);
-            connection.setNmDatabase("ideatennis");
+            connection.setNrIp("localhost");
+            connection.setNrPort(5433);
+            connection.setNmDatabase("miller");
             connection.setNmUser("postgres");
             connection.setCdPass("postgres");
             connection.setNmSchema("public");
             confMapList = new ConfMappingController(em).findAll();
-            confMapList.add(new ConfMap(0, "New One"));
+            confMapList.add(0, new ConfMap(0, "New One"));
         } catch (Exception ex) {
             ex.printStackTrace();
             confMapList = new ArrayList<ConfMap>();
@@ -69,8 +70,6 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
 
             //busca nomes de todas tabelas do BD
             schema = schemaDTOController.loadByNmSchema("tc2", ConnectionDTO.MYSQL);
-            confMappingList = new ArrayList<ConfMapping>();
-
             loadSchemaToExport();
             return SUCCESS;
         } catch (Exception ex) {
@@ -85,6 +84,14 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
         connection.open();
         schemaExport = new SchemaDTOController(connection.getEm())
                 .loadByNmSchema(connection.getNmSchema(), connection.getDbType());
+        if (confMap == null || confMap.getIdMap() == null
+                || confMap.getIdMap().equals(0)) {
+            confMappingList = new ArrayList<ConfMapping>();
+        } else {
+            confMap = em.find(ConfMap.class, confMap.getIdMap());
+            confMappingList = new ConfMappingController(em)
+                    .findByConfMap(confMap.getIdMap());
+        }
         connection.close();
     }
 
@@ -169,6 +176,14 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
 
     public void setSessionMap(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
+    }
+
+    public ConfMap getConfMap() {
+        return confMap;
+    }
+
+    public void setConfMap(ConfMap confMap) {
+        this.confMap = confMap;
     }
 
 }

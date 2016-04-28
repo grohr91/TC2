@@ -23,7 +23,7 @@ public class ConfMapAction extends ActionSupport implements EMAware {
     private String dsMessage;
 
     private ConfMap confMap;
-    private List<ConfMapping> mappingList;
+    private List<ConfMapping> confMappingList;
     private Map<String, Object> sessionMap;
 
     public String save() {
@@ -31,17 +31,22 @@ public class ConfMapAction extends ActionSupport implements EMAware {
             sessionMap = ActionContext.getContext().getSession();
             connection = (ConnectionDTO) sessionMap.get("CURRENT_CONNECTION");
             connection.open();
+            em.getTransaction().begin();
             //logica de salvar aqui
             ConfMapController cmc = new ConfMapController(em);
             confMap = cmc.save(confMap);
 
             ConfMappingController cmc1 = new ConfMappingController(em);
-            mappingList = cmc1.saveList(mappingList, confMap);
+            confMappingList = cmc1.saveList(confMappingList, confMap);
+            em.getTransaction().commit();
             connection.close();
             return SUCCESS;
         } catch (Exception ex) {
             ex.printStackTrace();
             dsMessage = "Something wrong occoured";
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         }
         return ERROR;
     }
@@ -78,12 +83,12 @@ public class ConfMapAction extends ActionSupport implements EMAware {
         this.sessionMap = sessionMap;
     }
 
-    public List<ConfMapping> getMappingList() {
-        return mappingList;
+    public List<ConfMapping> getConfMappingList() {
+        return confMappingList;
     }
 
-    public void setMappingList(List<ConfMapping> mappingList) {
-        this.mappingList = mappingList;
+    public void setConfMappingList(List<ConfMapping> confMappingList) {
+        this.confMappingList = confMappingList;
     }
 
     public ConfMap getConfMap() {

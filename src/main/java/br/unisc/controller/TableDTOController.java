@@ -40,11 +40,14 @@ public class TableDTOController implements DatabaseAware {
 
         int i = 0;
         for (Object o : result) {
-            if(isConfTables(schema, o.toString())) {
+            if (isConfTables(schema, o.toString())) {
                 continue;
             }
             TableDTO t = new TableDTO(o.toString());
-            t.setColumnList(findColumnByNmTable(t.getNmTable(), schema.getDbType()));
+
+            if (schema.getNmSchema().equals("tc2")) {
+                t.setColumnList(findColumnByNmTable(t.getNmTable(), schema.getDbType()));
+            }
             tableList.put(i++, t);
         }
         return tableList;
@@ -70,7 +73,7 @@ public class TableDTOController implements DatabaseAware {
     }
 
     private boolean isConfTables(SchemaDTO schema, String table) {
-        return ("tc2".equals(schema.getNmSchema()) 
+        return ("tc2".equals(schema.getNmSchema())
                 && (table.startsWith("conf_") || table.startsWith("param")));
     }
 

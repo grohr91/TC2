@@ -37,7 +37,8 @@
                 <s:iterator value="value" status="status">
                     <s:iterator value="columnList">
                         <div class="input-group" style="width: 100%">
-                            <s:select name="mappingList[%{counter}].tableSource"
+                            <s:property value="confMappingList[%{counter}].nmTableSource"/>
+                            <s:select name="confMappingList[%{counter}].nmTableSource"
                                       list="schemaExport.tableList"
                                       listKey="value.nmTable"
                                       listValue="value.nmTable"
@@ -48,14 +49,17 @@
 
                             <%-- TODO: CRIAR NOVA ACTION QUE RECEBE TABELA E CAMPO SELECIONADO e carregar list de campos da respectiva tabela --%>
                             <%-- ALTERNATIVA: carregar json com estrutura de tabelas e alterar a partir de hiddens de controle --%>
-                            <select name="mappingList[${#counter}].fieldSource"
-                                    class="form-control field" 
-                                    style="width: 50%">
-                                <option/>
-                            </select>
+                            <s:select name="confMappingList[%{counter}].nmFieldSource"
+                                      list="confMappingList"
+                                      listKey="value.nmFieldSource"
+                                      listValue="value.nmFieldSource"
+                                      cssClass="form-control field" 
+                                      cssStyle="width: 50%"/>
                             <span class="input-group-addon" style="width: 230px;">
                                 <s:property value="value"/>
-                                <s:hidden name="mappingList[%{counter}].fieldDest" />
+                                <input type="hidden" 
+                                       name="confMappingList[<s:property value="#counter"/>].nmFieldDest" 
+                                       value="<s:property value="nmTable"/>.<s:property value="value"/>"/>
                             </span>
                         </div>
                         <s:set var="counter" value="%{#counter+1}"/>

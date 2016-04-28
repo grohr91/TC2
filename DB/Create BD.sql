@@ -207,6 +207,34 @@ ENGINE = InnoDB
 COMMENT = 'Todas as metas atingidas por um grupo';
 
 
+-- -----------------------------------------------------
+-- Table `tc2`.`conf_map`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tc2`.`conf_map` (
+  `id_map` INT NOT NULL AUTO_INCREMENT,
+  `nm_map` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id_map`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `tc2`.`conf_mapping`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tc2`.`conf_mapping` (
+  `id_mapping` INT NOT NULL AUTO_INCREMENT,
+  `id_map` INT NOT NULL,
+  `nm_table_source` VARCHAR(255) NOT NULL,
+  `nm_field_source` VARCHAR(255) NOT NULL,
+  `nm_field_dest` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id_mapping`),
+  CONSTRAINT `fk_mapping_id_map`
+    FOREIGN KEY (`id_map`)
+    REFERENCES `tc2`.`conf_map` (`id_map`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+

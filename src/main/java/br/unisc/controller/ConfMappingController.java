@@ -30,10 +30,15 @@ public class ConfMappingController {
     }
 
     public List<ConfMapping> saveList(List<ConfMapping> mappingList, ConfMap confMap) {
-        for (ConfMapping cm: mappingList){
+        for (ConfMapping cm : mappingList) {
+            if (cm.getNmFieldSource() == null || cm.getNmFieldSource().isEmpty()) {
+                cm.setNmFieldSource("");
+                cm.setNmTableSource("");
+            }
             cm.setConfMap(confMap);
+            cm = save(cm);
         }
-        
+
         return mappingList;
     }
 
@@ -43,6 +48,13 @@ public class ConfMappingController {
         q.setParameter(1, idMap);
         q.executeUpdate();
         em.flush();
+    }
+
+    public List<ConfMapping> findByConfMap(Integer idMap) {
+        Query q = em.createNativeQuery("SELECT * FROM conf_mapping "
+                + "WHERE id_map = ?1 ORDER BY id_mapping", ConfMapping.class);
+        q.setParameter(1, idMap);
+        return q.getResultList();
     }
 
 }
