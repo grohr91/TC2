@@ -47,14 +47,20 @@
                                       emptyOption="true"
                                       onchange="loadColumnByNmTable(this);"/>
 
-                            <%-- TODO: CRIAR NOVA ACTION QUE RECEBE TABELA E CAMPO SELECIONADO e carregar list de campos da respectiva tabela --%>
-                            <%-- ALTERNATIVA: carregar json com estrutura de tabelas e alterar a partir de hiddens de controle --%>
-                            <s:select name="confMappingList[%{counter}].nmFieldSource"
-                                      list="confMappingList"
-                                      listKey="value.nmFieldSource"
-                                      listValue="value.nmFieldSource"
-                                      cssClass="form-control field" 
-                                      cssStyle="width: 50%"/>
+                            <s:if test="confMappingList.isEmpty()">
+                                <s:select name="confMappingList[%{counter}].nmFieldSource"
+                                          list="confMappingList"
+                                          cssClass="form-control field" 
+                                          cssStyle="width: 50%"/>
+                            </s:if>
+                            <s:else>
+                                <s:select name="confMappingList[#counter].nmFieldSource"
+                                          list="confMappingList[#counter].columnList"
+                                          listKey="value"
+                                          listValue="value"
+                                          cssClass="form-control field" 
+                                          cssStyle="width: 50%"/>
+                            </s:else>
                             <span class="input-group-addon" style="width: 230px;">
                                 <s:property value="value"/>
                                 <input type="hidden" 

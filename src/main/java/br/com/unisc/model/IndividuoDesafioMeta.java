@@ -37,10 +37,10 @@ public class IndividuoDesafioMeta implements Serializable {
     private Integer idindividuoDesafioMeta;
     @JoinColumn(name = "meta_id_meta", referencedColumnName = "id_meta")
     @ManyToOne(optional = false)
-    private Meta metaIdMeta;
+    private Meta meta;
     @JoinColumn(name = "individuo_desafio_id_individuo_desafio", referencedColumnName = "id_individuo_desafio")
     @ManyToOne(optional = false)
-    private IndividuoDesafio individuoDesafioIdIndividuoDesafio;
+    private IndividuoDesafio individuoDesafio;
 
     public IndividuoDesafioMeta() {
     }
@@ -57,20 +57,20 @@ public class IndividuoDesafioMeta implements Serializable {
         this.idindividuoDesafioMeta = idindividuoDesafioMeta;
     }
 
-    public Meta getMetaIdMeta() {
-        return metaIdMeta;
+    public Meta getMeta() {
+        return meta;
     }
 
-    public void setMetaIdMeta(Meta metaIdMeta) {
-        this.metaIdMeta = metaIdMeta;
+    public void setMeta(Meta meta) {
+        this.meta = meta;
     }
 
-    public IndividuoDesafio getIndividuoDesafioIdIndividuoDesafio() {
-        return individuoDesafioIdIndividuoDesafio;
+    public IndividuoDesafio getIndividuoDesafio() {
+        return individuoDesafio;
     }
 
-    public void setIndividuoDesafioIdIndividuoDesafio(IndividuoDesafio individuoDesafioIdIndividuoDesafio) {
-        this.individuoDesafioIdIndividuoDesafio = individuoDesafioIdIndividuoDesafio;
+    public void setIndividuoDesafio(IndividuoDesafio individuoDesafio) {
+        this.individuoDesafio = individuoDesafio;
     }
 
     @Override
@@ -97,5 +97,5 @@ public class IndividuoDesafioMeta implements Serializable {
     public String toString() {
         return "br.com.unisc.model.IndividuoDesafioMeta[ idindividuoDesafioMeta=" + idindividuoDesafioMeta + " ]";
     }
-    
+
 }

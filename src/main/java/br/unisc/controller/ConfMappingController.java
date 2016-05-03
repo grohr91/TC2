@@ -2,6 +2,7 @@ package br.unisc.controller;
 
 import br.com.unisc.model.ConfMap;
 import br.com.unisc.model.ConfMapping;
+import br.unisc.dto.ConnectionDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -55,6 +56,18 @@ public class ConfMappingController {
                 + "WHERE id_map = ?1 ORDER BY id_mapping", ConfMapping.class);
         q.setParameter(1, idMap);
         return q.getResultList();
+    }
+
+    public void populateColumnList(List<ConfMapping> confMappingList,
+            ConnectionDTO conn) {
+        if (confMappingList != null) {
+            TableDTOController tc = new TableDTOController(conn.getEm());
+            for (ConfMapping cm : confMappingList) {
+                cm.setColumnList(
+                        tc.findColumnByNmTable(cm.getNmTableSource(),
+                                conn.getDbType()));
+            }
+        }
     }
 
 }

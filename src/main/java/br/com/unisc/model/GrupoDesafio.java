@@ -58,11 +58,11 @@ public class GrupoDesafio implements Serializable {
     private int xpTotalGanho;
     @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo")
     @ManyToOne(optional = false)
-    private Grupo idGrupo;
+    private Grupo grupo;
     @JoinColumn(name = "id_desafio", referencedColumnName = "id_desafio")
     @ManyToOne(optional = false)
-    private Desafio idDesafio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoDesafioIdGrupoDesafio")
+    private Desafio desafio;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoDesafio")
     private List<GrupoDesafioMeta> grupoDesafioMetaList;
 
     public GrupoDesafio() {
@@ -117,20 +117,20 @@ public class GrupoDesafio implements Serializable {
         this.xpTotalGanho = xpTotalGanho;
     }
 
-    public Grupo getIdGrupo() {
-        return idGrupo;
+    public Grupo getGrupo() {
+        return grupo;
     }
 
-    public void setIdGrupo(Grupo idGrupo) {
-        this.idGrupo = idGrupo;
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
-    public Desafio getIdDesafio() {
-        return idDesafio;
+    public Desafio getDesafio() {
+        return desafio;
     }
 
-    public void setIdDesafio(Desafio idDesafio) {
-        this.idDesafio = idDesafio;
+    public void setDesafio(Desafio desafio) {
+        this.desafio = desafio;
     }
 
     public List<GrupoDesafioMeta> getGrupoDesafioMetaList() {
@@ -165,5 +165,5 @@ public class GrupoDesafio implements Serializable {
     public String toString() {
         return "br.com.unisc.model.GrupoDesafio[ idGrupoDesafio=" + idGrupoDesafio + " ]";
     }
-    
+
 }

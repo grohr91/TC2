@@ -40,7 +40,7 @@ public class TableDTOController implements DatabaseAware {
 
         int i = 0;
         for (Object o : result) {
-            if (isConfTables(schema, o.toString())) {
+            if (isMySchemaTables(schema, o.toString())) {
                 continue;
             }
             TableDTO t = new TableDTO(o.toString());
@@ -54,6 +54,11 @@ public class TableDTOController implements DatabaseAware {
     }
 
     public LinkedHashMap<Integer, String> findColumnByNmTable(String nmTable, int dbType) {
+        LinkedHashMap<Integer, String> columnList = new LinkedHashMap<Integer, String>();
+        if (nmTable == null || nmTable.isEmpty()) {
+            return columnList;
+        }
+
         Query q = null;
         if (ConnectionDTO.MYSQL == dbType) {
             q = em.createNativeQuery(MYSQL_TABLE_FIELD_QUERY);
@@ -63,8 +68,6 @@ public class TableDTOController implements DatabaseAware {
         q.setParameter(1, nmTable);
         List<String> result = q.getResultList();
 
-        LinkedHashMap<Integer, String> columnList = new LinkedHashMap<Integer, String>();
-
         int i = 0;
         for (String c : result) {
             columnList.put(i++, c);
@@ -72,9 +75,10 @@ public class TableDTOController implements DatabaseAware {
         return columnList;
     }
 
-    private boolean isConfTables(SchemaDTO schema, String table) {
+    private boolean isMySchemaTables(SchemaDTO schema, String table) {
         return ("tc2".equals(schema.getNmSchema())
-                && (table.startsWith("conf_") || table.startsWith("param")));
+                && (table.startsWith("conf_") || table.startsWith("param")
+                || table.startsWith("individuo_") || table.startsWith("grupo_")));
     }
 
 }

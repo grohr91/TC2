@@ -33,7 +33,6 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Individuo.findAll", query = "SELECT i FROM Individuo i"),
     @NamedQuery(name = "Individuo.findByIdIndividuo", query = "SELECT i FROM Individuo i WHERE i.idIndividuo = :idIndividuo"),
-    @NamedQuery(name = "Individuo.findByIdIndividuoSg", query = "SELECT i FROM Individuo i WHERE i.idIndividuoSg = :idIndividuoSg"),
     @NamedQuery(name = "Individuo.findByNmIndividuo", query = "SELECT i FROM Individuo i WHERE i.nmIndividuo = :nmIndividuo"),
     @NamedQuery(name = "Individuo.findByDtNascimento", query = "SELECT i FROM Individuo i WHERE i.dtNascimento = :dtNascimento"),
     @NamedQuery(name = "Individuo.findByXpAtual", query = "SELECT i FROM Individuo i WHERE i.xpAtual = :xpAtual"),
@@ -50,8 +49,6 @@ public class Individuo implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_individuo")
     private Integer idIndividuo;
-    @Column(name = "id_individuo_sg")
-    private Integer idIndividuoSg;
     @Basic(optional = false)
     @Column(name = "nm_individuo")
     private String nmIndividuo;
@@ -70,11 +67,11 @@ public class Individuo implements Serializable {
     private Integer qtItens;
     @Column(name = "qt_vida")
     private Integer qtVida;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idIndividuo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "individuo")
     private List<IndividuoDesafio> individuoDesafioList;
     @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo")
     @ManyToOne(optional = false)
-    private Grupo idGrupo;
+    private Grupo grupo;
 
     public Individuo() {
     }
@@ -94,14 +91,6 @@ public class Individuo implements Serializable {
 
     public void setIdIndividuo(Integer idIndividuo) {
         this.idIndividuo = idIndividuo;
-    }
-
-    public Integer getIdIndividuoSg() {
-        return idIndividuoSg;
-    }
-
-    public void setIdIndividuoSg(Integer idIndividuoSg) {
-        this.idIndividuoSg = idIndividuoSg;
     }
 
     public String getNmIndividuo() {
@@ -176,12 +165,12 @@ public class Individuo implements Serializable {
         this.individuoDesafioList = individuoDesafioList;
     }
 
-    public Grupo getIdGrupo() {
-        return idGrupo;
+    public Grupo getGrupo() {
+        return grupo;
     }
 
-    public void setIdGrupo(Grupo idGrupo) {
-        this.idGrupo = idGrupo;
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
     @Override

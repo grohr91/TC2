@@ -37,10 +37,10 @@ public class GrupoDesafioMeta implements Serializable {
     private Integer idGrupoDesafioMeta;
     @JoinColumn(name = "meta_id_meta", referencedColumnName = "id_meta")
     @ManyToOne(optional = false)
-    private Meta metaIdMeta;
+    private Meta meta;
     @JoinColumn(name = "grupo_desafio_id_grupo_desafio", referencedColumnName = "id_grupo_desafio")
     @ManyToOne(optional = false)
-    private GrupoDesafio grupoDesafioIdGrupoDesafio;
+    private GrupoDesafio grupoDesafio;
 
     public GrupoDesafioMeta() {
     }
@@ -57,20 +57,20 @@ public class GrupoDesafioMeta implements Serializable {
         this.idGrupoDesafioMeta = idGrupoDesafioMeta;
     }
 
-    public Meta getMetaIdMeta() {
-        return metaIdMeta;
+    public Meta getMeta() {
+        return meta;
     }
 
-    public void setMetaIdMeta(Meta metaIdMeta) {
-        this.metaIdMeta = metaIdMeta;
+    public void setMeta(Meta meta) {
+        this.meta = meta;
     }
 
-    public GrupoDesafio getGrupoDesafioIdGrupoDesafio() {
-        return grupoDesafioIdGrupoDesafio;
+    public GrupoDesafio getGrupoDesafio() {
+        return grupoDesafio;
     }
 
-    public void setGrupoDesafioIdGrupoDesafio(GrupoDesafio grupoDesafioIdGrupoDesafio) {
-        this.grupoDesafioIdGrupoDesafio = grupoDesafioIdGrupoDesafio;
+    public void setGrupoDesafio(GrupoDesafio grupoDesafio) {
+        this.grupoDesafio = grupoDesafio;
     }
 
     @Override
@@ -97,5 +97,5 @@ public class GrupoDesafioMeta implements Serializable {
     public String toString() {
         return "br.com.unisc.model.GrupoDesafioMeta[ idGrupoDesafioMeta=" + idGrupoDesafioMeta + " ]";
     }
-    
+
 }

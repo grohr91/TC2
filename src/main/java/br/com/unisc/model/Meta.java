@@ -69,12 +69,16 @@ public class Meta implements Serializable {
     private Character sgSituacaoAtingir;
     @Column(name = "xp_reconpensa")
     private Double xpReconpensa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "metaIdMeta")
+    @Column(name = "xp_adquirido")
+    private Double xpAdquirido;
+    @Column(name = "fg_atingiu")
+    private Boolean fgAtingiu;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "meta")
     private List<IndividuoDesafioMeta> individuoDesafioMetaList;
     @JoinColumn(name = "id_desafio", referencedColumnName = "id_desafio")
     @ManyToOne(optional = false)
-    private Desafio idDesafio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "metaIdMeta")
+    private Desafio desafio;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "meta")
     private List<GrupoDesafioMeta> grupoDesafioMetaList;
 
     public Meta() {
@@ -170,12 +174,28 @@ public class Meta implements Serializable {
         this.individuoDesafioMetaList = individuoDesafioMetaList;
     }
 
-    public Desafio getIdDesafio() {
-        return idDesafio;
+    public Desafio getDesafio() {
+        return desafio;
     }
 
-    public void setIdDesafio(Desafio idDesafio) {
-        this.idDesafio = idDesafio;
+    public void setDesafio(Desafio desafio) {
+        this.desafio = desafio;
+    }
+
+    public Double getXpAdquirido() {
+        return xpAdquirido;
+    }
+
+    public void setXpAdquirido(Double xpAdquirido) {
+        this.xpAdquirido = xpAdquirido;
+    }
+
+    public Boolean getFgAtingiu() {
+        return fgAtingiu;
+    }
+
+    public void setFgAtingiu(Boolean fgAtingiu) {
+        this.fgAtingiu = fgAtingiu;
     }
 
     public List<GrupoDesafioMeta> getGrupoDesafioMetaList() {
@@ -210,5 +230,5 @@ public class Meta implements Serializable {
     public String toString() {
         return "br.com.unisc.model.Meta[ idMeta=" + idMeta + " ]";
     }
-    
+
 }

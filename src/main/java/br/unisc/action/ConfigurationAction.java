@@ -39,8 +39,10 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
             connection.setNmUser("postgres");
             connection.setCdPass("postgres");
             connection.setNmSchema("public");
-            confMapList = new ConfMappingController(em).findAll();
+
+            confMapList = new ArrayList<ConfMap>();
             confMapList.add(0, new ConfMap(0, "New One"));
+            confMapList = new ConfMappingController(em).findAll();
         } catch (Exception ex) {
             ex.printStackTrace();
             confMapList = new ArrayList<ConfMap>();
@@ -80,6 +82,7 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
     }
 
     private void loadSchemaToExport() {
+        ConfMappingController cmc = new ConfMappingController(em);
         //busca nomes de todas tabelas do BD configurado
         connection.open();
         schemaExport = new SchemaDTOController(connection.getEm())
@@ -87,11 +90,12 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
         if (confMap == null || confMap.getIdMap() == null
                 || confMap.getIdMap().equals(0)) {
             confMappingList = new ArrayList<ConfMapping>();
+            confMappingList = cmc.findByConfMap(confMap.getIdMap());
         } else {
             confMap = em.find(ConfMap.class, confMap.getIdMap());
-            confMappingList = new ConfMappingController(em)
-                    .findByConfMap(confMap.getIdMap());
+            confMappingList = cmc.findByConfMap(confMap.getIdMap());
         }
+        cmc.populateColumnList(confMappingList, connection);
         connection.close();
     }
 

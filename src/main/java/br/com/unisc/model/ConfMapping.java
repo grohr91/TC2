@@ -6,6 +6,7 @@
 package br.com.unisc.model;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -49,6 +51,8 @@ public class ConfMapping implements Serializable {
     @JoinColumn(name = "id_map", referencedColumnName = "id_map")
     @ManyToOne(optional = false)
     private ConfMap confMap;
+    @Transient
+    private LinkedHashMap<Integer, String> columnList;
 
     public ConfMapping() {
     }
@@ -108,6 +112,14 @@ public class ConfMapping implements Serializable {
 
     public void setNmTableSource(String nmTableSource) {
         this.nmTableSource = nmTableSource;
+    }
+
+    public LinkedHashMap<Integer, String> getColumnList() {
+        return columnList;
+    }
+
+    public void setColumnList(LinkedHashMap<Integer, String> columnList) {
+        this.columnList = columnList;
     }
 
     @Override

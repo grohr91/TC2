@@ -28,7 +28,6 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Desafio.findAll", query = "SELECT d FROM Desafio d"),
     @NamedQuery(name = "Desafio.findByIdDesafio", query = "SELECT d FROM Desafio d WHERE d.idDesafio = :idDesafio"),
-    @NamedQuery(name = "Desafio.findByIdDesafioSg", query = "SELECT d FROM Desafio d WHERE d.idDesafioSg = :idDesafioSg"),
     @NamedQuery(name = "Desafio.findByNmDesafio", query = "SELECT d FROM Desafio d WHERE d.nmDesafio = :nmDesafio"),
     @NamedQuery(name = "Desafio.findByNrNivelNecessario", query = "SELECT d FROM Desafio d WHERE d.nrNivelNecessario = :nrNivelNecessario")})
 public class Desafio implements Serializable {
@@ -39,18 +38,16 @@ public class Desafio implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_desafio")
     private Integer idDesafio;
-    @Column(name = "id_desafio_sg")
-    private Integer idDesafioSg;
     @Column(name = "nm_desafio")
     private String nmDesafio;
     @Basic(optional = false)
     @Column(name = "nr_nivel_necessario")
     private int nrNivelNecessario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDesafio")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "desafio")
     private List<IndividuoDesafio> individuoDesafioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDesafio")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "desafio")
     private List<GrupoDesafio> grupoDesafioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDesafio")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "desafio")
     private List<Meta> metaList;
 
     public Desafio() {
@@ -71,14 +68,6 @@ public class Desafio implements Serializable {
 
     public void setIdDesafio(Integer idDesafio) {
         this.idDesafio = idDesafio;
-    }
-
-    public Integer getIdDesafioSg() {
-        return idDesafioSg;
-    }
-
-    public void setIdDesafioSg(Integer idDesafioSg) {
-        this.idDesafioSg = idDesafioSg;
     }
 
     public String getNmDesafio() {

@@ -58,11 +58,11 @@ public class IndividuoDesafio implements Serializable {
     private double xpTotalGanho;
     @JoinColumn(name = "id_individuo", referencedColumnName = "id_individuo")
     @ManyToOne(optional = false)
-    private Individuo idIndividuo;
+    private Individuo individuo;
     @JoinColumn(name = "id_desafio", referencedColumnName = "id_desafio")
     @ManyToOne(optional = false)
-    private Desafio idDesafio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "individuoDesafioIdIndividuoDesafio")
+    private Desafio desafio;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "individuoDesafio")
     private List<IndividuoDesafioMeta> individuoDesafioMetaList;
 
     public IndividuoDesafio() {
@@ -117,20 +117,20 @@ public class IndividuoDesafio implements Serializable {
         this.xpTotalGanho = xpTotalGanho;
     }
 
-    public Individuo getIdIndividuo() {
-        return idIndividuo;
+    public Individuo getIndividuo() {
+        return individuo;
     }
 
-    public void setIdIndividuo(Individuo idIndividuo) {
-        this.idIndividuo = idIndividuo;
+    public void setIndividuo(Individuo individuo) {
+        this.individuo = individuo;
     }
 
-    public Desafio getIdDesafio() {
-        return idDesafio;
+    public Desafio getDesafio() {
+        return desafio;
     }
 
-    public void setIdDesafio(Desafio idDesafio) {
-        this.idDesafio = idDesafio;
+    public void setDesafio(Desafio desafio) {
+        this.desafio = desafio;
     }
 
     public List<IndividuoDesafioMeta> getIndividuoDesafioMetaList() {
@@ -165,5 +165,5 @@ public class IndividuoDesafio implements Serializable {
     public String toString() {
         return "br.com.unisc.model.IndividuoDesafio[ idIndividuoDesafio=" + idIndividuoDesafio + " ]";
     }
-    
+
 }

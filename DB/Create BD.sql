@@ -10,7 +10,6 @@ USE `tc2` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tc2`.`grupo` (
   `id_grupo` INT NOT NULL AUTO_INCREMENT,
-  `id_grupo_sg` INT(11) NULL,
   `nm_grupo` VARCHAR(255) NOT NULL,
   `xp_atual` INT(11) NULL,
   `qt_desafios_concluidos` INT(11) NULL,
@@ -28,7 +27,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `tc2`.`individuo` (
   `id_individuo` INT NOT NULL AUTO_INCREMENT,
   `id_grupo` INT NOT NULL,
-  `id_individuo_sg` INT(11) NULL,
   `nm_individuo` VARCHAR(45) NOT NULL,
   `dt_nascimento` DATE NULL,
   `xp_atual` INT(11) NULL,
@@ -53,6 +51,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tc2`.`equipe` (
   `id_equipe` INT UNSIGNED NOT NULL,
+  `nm_equipe` VARCHAR(45),
   PRIMARY KEY (`id_equipe`))
 ENGINE = InnoDB;
 
@@ -64,7 +63,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tc2`.`desafio` (
   `id_desafio` INT NOT NULL AUTO_INCREMENT,
-  `id_desafio_sg` INT(11) NULL,
   `nm_desafio` VARCHAR(255) NULL,
   `nr_nivel_necessario` INT(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_desafio`))
@@ -77,7 +75,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `tc2`.`meta` (
   `id_meta` INT NOT NULL AUTO_INCREMENT,
   `id_desafio` INT NOT NULL,
-  `id_meta_sg` INT(11) NULL,
   `nm_meta` VARCHAR(255) NOT NULL,
   `sg_tipo` CHAR(1) NOT NULL,
   `fg_obrigatorio` Boolean ,
@@ -85,6 +82,8 @@ CREATE TABLE IF NOT EXISTS `tc2`.`meta` (
   `vl_atingir` DOUBLE NULL,
   `sg_situacao_atingir` CHAR(1) NULL,
   `xp_reconpensa` DOUBLE NULL,
+  `xp_adquirido` DOUBLE,
+  `fg_atingiu` BOOLEAN,
   PRIMARY KEY (`id_meta`),
   INDEX `fk_reconpensa_desafio1_idx` (`id_desafio` ASC),
   CONSTRAINT `fk_reconpensa_desafio1`
@@ -105,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `tc2`.`individuo_desafio` (
   `sg_status` CHAR(1) NULL,
   `dt_inicio` DATETIME NULL,
   `dt_fim` DATETIME NULL,
-  `xp_total_ganho` DOUBLE NOT NULL DEFAULT 0,
+  `xp_total_ganho` DOUBLE,
   PRIMARY KEY (`id_individuo_desafio`),
   INDEX `fk_individuo_desafio_individuo1_idx` (`id_individuo` ASC),
   INDEX `fk_individuo_desafio_desafio1_idx` (`id_desafio` ASC),
@@ -121,17 +120,6 @@ CREATE TABLE IF NOT EXISTS `tc2`.`individuo_desafio` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `tc2`.`parametro`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tc2`.`parametro` (
-  `id_parametro` VARCHAR(20) NOT NULL COMMENT 'A tabela parametro ira contrer informeções de:\n   Dados da conexão da origem\n   Nr dias de atualização\n   Nome da empresa',
-  `vl_parametro` VARCHAR(255) NULL,
-  PRIMARY KEY (`id_parametro`))
-ENGINE = InnoDB;
-
-
 -- -----------------------------------------------------
 -- Table `tc2`.`grupo_desafio`
 -- -----------------------------------------------------
@@ -142,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `tc2`.`grupo_desafio` (
   `sg_status` CHAR(1) NULL,
   `dt_inicio` DATETIME NULL,
   `dt_fim` DATETIME NULL,
-  `xp_total_ganho` INT(11) NOT NULL DEFAULT 0,
+  `xp_total_ganho` DOUBLE,
   PRIMARY KEY (`id_grupo_desafio`),
   INDEX `fk_grupo_desafio_grupo1_idx` (`id_grupo` ASC),
   INDEX `fk_grupo_desafio_desafio1_idx` (`id_desafio` ASC),

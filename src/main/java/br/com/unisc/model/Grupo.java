@@ -28,7 +28,6 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Grupo.findAll", query = "SELECT g FROM Grupo g"),
     @NamedQuery(name = "Grupo.findByIdGrupo", query = "SELECT g FROM Grupo g WHERE g.idGrupo = :idGrupo"),
-    @NamedQuery(name = "Grupo.findByIdGrupoSg", query = "SELECT g FROM Grupo g WHERE g.idGrupoSg = :idGrupoSg"),
     @NamedQuery(name = "Grupo.findByNmGrupo", query = "SELECT g FROM Grupo g WHERE g.nmGrupo = :nmGrupo"),
     @NamedQuery(name = "Grupo.findByXpAtual", query = "SELECT g FROM Grupo g WHERE g.xpAtual = :xpAtual"),
     @NamedQuery(name = "Grupo.findByQtDesafiosConcluidos", query = "SELECT g FROM Grupo g WHERE g.qtDesafiosConcluidos = :qtDesafiosConcluidos"),
@@ -44,8 +43,6 @@ public class Grupo implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_grupo")
     private Integer idGrupo;
-    @Column(name = "id_grupo_sg")
-    private Integer idGrupoSg;
     @Basic(optional = false)
     @Column(name = "nm_grupo")
     private String nmGrupo;
@@ -62,9 +59,9 @@ public class Grupo implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "vl_dinheiro")
     private Double vlDinheiro;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGrupo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupo")
     private List<GrupoDesafio> grupoDesafioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGrupo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupo")
     private List<Individuo> individuoList;
 
     public Grupo() {
@@ -85,14 +82,6 @@ public class Grupo implements Serializable {
 
     public void setIdGrupo(Integer idGrupo) {
         this.idGrupo = idGrupo;
-    }
-
-    public Integer getIdGrupoSg() {
-        return idGrupoSg;
-    }
-
-    public void setIdGrupoSg(Integer idGrupoSg) {
-        this.idGrupoSg = idGrupoSg;
     }
 
     public String getNmGrupo() {

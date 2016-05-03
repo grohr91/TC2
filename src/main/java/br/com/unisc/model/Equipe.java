@@ -30,6 +30,8 @@ public class Equipe implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_equipe")
     private Integer idEquipe;
+    @Column(name = "nm_equipe")
+    private String nmEquipe;
 
     public Equipe() {
     }
@@ -46,11 +48,12 @@ public class Equipe implements Serializable {
         this.idEquipe = idEquipe;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idEquipe != null ? idEquipe.hashCode() : 0);
-        return hash;
+    public String getNmEquipe() {
+        return nmEquipe;
+    }
+
+    public void setNmEquipe(String nmEquipe) {
+        this.nmEquipe = nmEquipe;
     }
 
     @Override
@@ -70,5 +73,5 @@ public class Equipe implements Serializable {
     public String toString() {
         return "br.com.unisc.model.Equipe[ idEquipe=" + idEquipe + " ]";
     }
-    
+
 }
