@@ -76,9 +76,10 @@ public class TableDTOController implements DatabaseAware {
     }
 
     private boolean isMySchemaTables(SchemaDTO schema, String table) {
-        return ("tc2".equals(schema.getNmSchema())
+        return (("tc2".equals(schema.getNmSchema())
                 && (table.startsWith("conf_") || table.startsWith("param")
-                || table.startsWith("individuo_") || table.startsWith("grupo_")));
+                || table.startsWith("individuo_") || table.startsWith("grupo_")))
+                || (!"tc2".equals(schema.getNmSchema()) && !table.startsWith("vw_")));
     }
 
 }

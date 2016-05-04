@@ -35,14 +35,14 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
             connection = new ConnectionDTO();
             connection.setNrIp("localhost");
             connection.setNrPort(5433);
-            connection.setNmDatabase("miller");
+            connection.setNmDatabase("ideatennis");
             connection.setNmUser("postgres");
             connection.setCdPass("postgres");
             connection.setNmSchema("public");
 
             confMapList = new ArrayList<ConfMap>();
             confMapList.add(0, new ConfMap(0, "New One"));
-            confMapList = new ConfMappingController(em).findAll();
+            confMapList.addAll(new ConfMappingController(em).findAll());
         } catch (Exception ex) {
             ex.printStackTrace();
             confMapList = new ArrayList<ConfMap>();

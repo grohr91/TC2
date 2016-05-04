@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <!--Menu-->
-<div class="col-md-3">
+<div class="col-md-2">
     <ul class="nav nav-tabs tabs-left">
         <li class="table-info"><a href="#table-info" data-toggle="tab">General Info</a></li>
             <s:iterator value="schema.tableList" status="st1">
@@ -17,7 +17,7 @@
 </div>
 
 <!--Fields-->
-<div class="col-md-9">
+<div class="col-md-10">
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane table-info" id="table-info">
@@ -54,7 +54,7 @@
                                           cssStyle="width: 50%"/>
                             </s:if>
                             <s:else>
-                                <s:select name="confMappingList[#counter].nmFieldSource"
+                                <s:select name="confMappingList[%{counter}].nmFieldSource"
                                           list="confMappingList[#counter].columnList"
                                           listKey="value"
                                           listValue="value"

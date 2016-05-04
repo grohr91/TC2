@@ -20,7 +20,11 @@ public class ConfMappingController {
     }
 
     public ConfMapping save(ConfMapping confMapping) {
-        em.persist(confMapping);
+        if (confMapping.getIdMapping() == null) {
+            em.persist(confMapping);
+        } else {
+            em.merge(confMapping);
+        }
         em.flush();
         return confMapping;
     }
@@ -37,6 +41,7 @@ public class ConfMappingController {
                 cm.setNmTableSource("");
             }
             cm.setConfMap(confMap);
+
             cm = save(cm);
         }
 

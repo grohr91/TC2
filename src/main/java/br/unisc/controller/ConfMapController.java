@@ -25,7 +25,11 @@ public class ConfMapController {
             }
         }
 
-        em.persist(confMap);
+        if (confMap.getIdMap() == null) {
+            em.persist(confMap);
+        } else {
+            em.merge(confMap);
+        }
         em.flush();
         return confMap;
     }

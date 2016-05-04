@@ -17,7 +17,7 @@ function clearForm(formId) {
 }
 
 function loadFields() {
-    var confMapParam = '&confMap.idMap='+ $("[name='confMap.idMap']").val();
+    var confMapParam = '&confMap.idMap=' + $("[name='confMap.idMap']").val();
     $.ajax({
         url: $("#url").val() + "/loadDatabase",
         data: $("#connectionForm").serialize() + confMapParam,
@@ -63,7 +63,7 @@ function saveMapping() {
             data: $("#mappingForm").serialize()
         }).done(function (data) {
             if (data.dsMessage == null || data.dsMessage == "") {
-                alert("Sucesso! Recarregar tela...");
+                loadFields();
             } else {
                 $("#message-div").empty().append(data.dsMessage);
             }

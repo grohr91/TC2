@@ -45,19 +45,6 @@ CREATE TABLE IF NOT EXISTS `tc2`.`individuo` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `tc2`.`equipe`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tc2`.`equipe` (
-  `id_equipe` INT UNSIGNED NOT NULL,
-  `nm_equipe` VARCHAR(45),
-  PRIMARY KEY (`id_equipe`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
-
 -- -----------------------------------------------------
 -- Table `tc2`.`desafio`
 -- -----------------------------------------------------
