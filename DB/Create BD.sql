@@ -26,7 +26,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tc2`.`individuo` (
   `id_individuo` INT NOT NULL AUTO_INCREMENT,
-  `id_grupo` INT NOT NULL,
   `nm_individuo` VARCHAR(45) NOT NULL,
   `dt_nascimento` DATE NULL,
   `xp_atual` INT(11) NULL,
@@ -41,6 +40,28 @@ CREATE TABLE IF NOT EXISTS `tc2`.`individuo` (
   CONSTRAINT `fk_individuo_grupo1`
     FOREIGN KEY (`id_grupo`)
     REFERENCES `tc2`.`grupo` (`id_grupo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `tc2`.`grupo_individuo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tc2`.`grupo_individuo` (
+  `id_grupo_individuo` INT NOT NULL AUTO_INCREMENT,
+  `id_grupo` INT NOT NULL,
+  `id_individuo` INT NOT NULL,
+  PRIMARY KEY (`id_grupo_individuo`),
+  UNIQUE INDEX `id_grupo_individuo_UNIQUE` (`id_grupo_individuo` ASC),
+  INDEX `fk_individuo_grupo2_idx` (`id_grupo` ASC),
+  CONSTRAINT `fk_individuo_grupo2`
+    FOREIGN KEY (`id_grupo`)
+    REFERENCES `tc2`.`grupo` (`id_grupo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_individuo_grupo3`
+    FOREIGN KEY (`id_individuo`)
+    REFERENCES `tc2`.`individuo` (`id_individuo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -84,6 +105,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `tc2`.`individuo_desafio`
 -- -----------------------------------------------------
+ALTER TABLE individuo_desafio ADD COLUMN vl_atingido FLOAT;
+ALTER TABLE individuo_desafio ADD COLUMN sg_atingido CHAR(1);
+ALTER TABLE individuo_desafio ADD COLUMN dt_atingido TIMESTAMP;
+
 CREATE TABLE IF NOT EXISTS `tc2`.`individuo_desafio` (
   `id_individuo_desafio` INT NOT NULL AUTO_INCREMENT,
   `id_individuo` INT NOT NULL,
@@ -92,6 +117,9 @@ CREATE TABLE IF NOT EXISTS `tc2`.`individuo_desafio` (
   `dt_inicio` DATETIME NULL,
   `dt_fim` DATETIME NULL,
   `xp_total_ganho` DOUBLE,
+  `vl_atingido` FLOAT,
+  `sg_atingido` CHAR(1),
+  `dt_atingido` TIMESTAMP,
   PRIMARY KEY (`id_individuo_desafio`),
   INDEX `fk_individuo_desafio_individuo1_idx` (`id_individuo` ASC),
   INDEX `fk_individuo_desafio_desafio1_idx` (`id_desafio` ASC),
@@ -118,6 +146,9 @@ CREATE TABLE IF NOT EXISTS `tc2`.`grupo_desafio` (
   `dt_inicio` DATETIME NULL,
   `dt_fim` DATETIME NULL,
   `xp_total_ganho` DOUBLE,
+  `vl_atingido` FLOAT,
+  `sg_atingido` CHAR(1),
+  `dt_atingido` TIMESTAMP,
   PRIMARY KEY (`id_grupo_desafio`),
   INDEX `fk_grupo_desafio_grupo1_idx` (`id_grupo` ASC),
   INDEX `fk_grupo_desafio_desafio1_idx` (`id_desafio` ASC),

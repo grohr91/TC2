@@ -109,7 +109,7 @@
                                         <div class="panel-footer text-right">
                                             <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
                                             <!--<a class="btn btn-default" href="javascript:testConnection();"><i class="glyphicon glyphicon-play"></i> Test Connection</a>-->
-                                            <a class="btn btn-primary" href="javascript:process();"><i class="glyphicon glyphicon-log-in"></i> Load Fields</a>
+                                            <a class="btn btn-primary" href="javascript:process();"><i class="glyphicon glyphicon-log-in"></i> Load Data</a>
                                         </div>
                                     </div>
                                 </div>

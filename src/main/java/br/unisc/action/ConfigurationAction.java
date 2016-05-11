@@ -1,16 +1,10 @@
 package br.unisc.action;
 
-import br.com.unisc.model.ConfMap;
-import br.com.unisc.model.ConfMapping;
-import br.unisc.controller.ConfMappingController;
-import br.unisc.controller.SchemaDTOController;
+import br.unisc.controller.GamificationController;
 import br.unisc.dto.ConnectionDTO;
-import br.unisc.dto.SchemaDTO;
 import br.unisc.util.EMAware;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 
@@ -22,12 +16,7 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
 
     private EntityManager em;
     private ConnectionDTO connection;
-    private SchemaDTO schema;
-    private SchemaDTO schemaExport;
     private String dsMessage;
-    private ConfMap confMap;
-    private List<ConfMap> confMapList;
-    private List<ConfMapping> confMappingList;
     private Map<String, Object> sessionMap;
 
     public String main() throws Exception {
@@ -40,17 +29,36 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
             connection.setCdPass("postgres");
             connection.setNmSchema("public");
 
-            confMapList = new ArrayList<ConfMap>();
-            confMapList.add(0, new ConfMap(0, "New One"));
-            confMapList.addAll(new ConfMappingController(em).findAll());
         } catch (Exception ex) {
             ex.printStackTrace();
-            confMapList = new ArrayList<ConfMap>();
         }
         return SUCCESS;
     }
 
-    public String testConnection() {
+    public String processGamification() {
+        try {
+            if (validConnection()) {
+                em.getTransaction().begin();
+                connection.open();
+                GamificationController gc = new GamificationController(em, connection);
+                gc.processVwIndividuoGrupo();
+                
+                gc.processVwIndividuoDesafio();
+                
+                gc.processVwGrupoDesafio();
+                em.getTransaction().commit();
+                connection.close();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            dsMessage = "Something wrong occoured";
+        } finally {
+            connection.close();
+        }
+        return SUCCESS;
+    }
+
+    private String testConnection() {
         try {
             dsMessage = connection.open();
             connection.close();
@@ -60,43 +68,6 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
             dsMessage = "Something wrong occoured";
         }
         return SUCCESS;
-    }
-
-    public String loadDatabase() {
-        try {
-            if (!validConnection()) {
-                return ERROR;
-            }
-            //passa conexão do BD TC2
-            SchemaDTOController schemaDTOController = new SchemaDTOController(em);
-
-            //busca nomes de todas tabelas do BD
-            schema = schemaDTOController.loadByNmSchema("tc2", ConnectionDTO.MYSQL);
-            loadSchemaToExport();
-            return SUCCESS;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            dsMessage = "Something wrong occoured";
-        }
-        return ERROR;
-    }
-
-    private void loadSchemaToExport() {
-        ConfMappingController cmc = new ConfMappingController(em);
-        //busca nomes de todas tabelas do BD configurado
-        connection.open();
-        schemaExport = new SchemaDTOController(connection.getEm())
-                .loadByNmSchema(connection.getNmSchema(), connection.getDbType());
-        if (confMap == null || confMap.getIdMap() == null
-                || confMap.getIdMap().equals(0)) {
-            confMappingList = new ArrayList<ConfMapping>();
-            confMappingList = cmc.findByConfMap(confMap.getIdMap());
-        } else {
-            confMap = em.find(ConfMap.class, confMap.getIdMap());
-            confMappingList = cmc.findByConfMap(confMap.getIdMap());
-        }
-        cmc.populateColumnList(confMappingList, connection);
-        connection.close();
     }
 
     private boolean validConnection() {
@@ -138,40 +109,8 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
         this.dsMessage = dsMessage;
     }
 
-    public SchemaDTO getSchema() {
-        return schema;
-    }
-
-    public void setSchema(SchemaDTO schema) {
-        this.schema = schema;
-    }
-
     public void setEm(EntityManager em) {
         this.em = em;
-    }
-
-    public List<ConfMap> getConfMapList() {
-        return confMapList;
-    }
-
-    public void setConfMapList(List<ConfMap> confMapList) {
-        this.confMapList = confMapList;
-    }
-
-    public List<ConfMapping> getConfMappingList() {
-        return confMappingList;
-    }
-
-    public void setConfMappingList(List<ConfMapping> confMappingList) {
-        this.confMappingList = confMappingList;
-    }
-
-    public SchemaDTO getSchemaExport() {
-        return schemaExport;
-    }
-
-    public void setSchemaExport(SchemaDTO schemaExport) {
-        this.schemaExport = schemaExport;
     }
 
     public Map<String, Object> getSessionMap() {
@@ -180,14 +119,6 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
 
     public void setSessionMap(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
-    }
-
-    public ConfMap getConfMap() {
-        return confMap;
-    }
-
-    public void setConfMap(ConfMap confMap) {
-        this.confMap = confMap;
     }
 
 }

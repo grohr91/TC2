@@ -18,19 +18,26 @@
             </interceptor-stack>
         </interceptors>
         <default-interceptor-ref name="jpaStack"/>
-        
+
         <action name="">
             <result name="success" type="redirectAction">
                 <param name="actionName">index</param>
                 <param name="namespace">/</param>
             </result>
         </action>
-		
         <action name="index" method="main" class="br.unisc.action.ConfigurationAction">
             <result name="success">pages/index.jsp</result>
         </action>
         
-        <action name="testConnection" method="testConnection" class="br.unisc.action.ConfigurationAction">
+         <action name="processGamification" method="processGamification" class="br.unisc.action.ConfigurationAction">
+            <result name="success" type="json">
+                <param name="includeProperties">
+                    ^dsMessage
+                </param>
+            </result>
+        </action>
+        
+<!--        <action name="testConnection" method="testConnection" class="br.unisc.action.ConfigurationAction">
             <result name="success" type="json">
                 <param name="includeProperties">
                     ^dsMessage
@@ -66,7 +73,7 @@
                     ^dsMessage
                 </param>
             </result>
-        </action>
+        </action>-->
     </package>
 	
 </struts>
