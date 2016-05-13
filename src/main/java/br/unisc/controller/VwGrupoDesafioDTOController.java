@@ -45,7 +45,7 @@ public class VwGrupoDesafioDTOController {
     }
 
     public GrupoDesafio findGrupoDesafio(Grupo g, Desafio d) {
-        Query q = em.createNamedQuery("SELECT * FROM grupo_desafio "
+        Query q = em.createNativeQuery("SELECT * FROM grupo_desafio "
                 + "WHERE id_grupo = ?1 AND id_desafio = ?2", GrupoDesafio.class);
         q.setParameter(1, g.getIdGrupo());
         q.setParameter(2, d.getIdDesafio());

@@ -16,7 +16,7 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
 
     private EntityManager em;
     private ConnectionDTO connection;
-    private String dsMessage;
+    private String dsMessage, dsInfo;
     private Map<String, Object> sessionMap;
 
     public String main() throws Exception {
@@ -41,11 +41,10 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
                 em.getTransaction().begin();
                 connection.open();
                 GamificationController gc = new GamificationController(em, connection);
-                gc.processVwIndividuoGrupo();
-                
-                gc.processVwIndividuoDesafio();
-                
-                gc.processVwGrupoDesafio();
+                dsInfo = "";
+                dsInfo += gc.processVwIndividuoGrupo();
+                dsInfo += "\n\n" + gc.processVwIndividuoDesafio();
+                dsInfo += "\n\n" + gc.processVwGrupoDesafio();
                 em.getTransaction().commit();
                 connection.close();
             }
@@ -119,6 +118,18 @@ public class ConfigurationAction extends ActionSupport implements EMAware {
 
     public void setSessionMap(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
+    }
+
+    public String getDsInfo() {
+        if (dsInfo != null && !dsInfo.isEmpty()) {
+            dsInfo = "<div class=\"alert alert-success\" role=\"alert\">"
+                    + dsInfo + "</div>";
+        }
+        return dsInfo;
+    }
+
+    public void setDsInfo(String dsInfo) {
+        this.dsInfo = dsInfo;
     }
 
 }

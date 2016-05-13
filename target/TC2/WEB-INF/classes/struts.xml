@@ -32,7 +32,8 @@
          <action name="processGamification" method="processGamification" class="br.unisc.action.ConfigurationAction">
             <result name="success" type="json">
                 <param name="includeProperties">
-                    ^dsMessage
+                    ^dsMessage,
+                    ^dsInfo
                 </param>
             </result>
         </action>

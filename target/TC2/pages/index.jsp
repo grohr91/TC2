@@ -40,7 +40,6 @@
 
                         <!-- ---------------- MESSAGES ---------------- -->
                         <div id="message-div" class="col-md-12"></div>
-
                         <!-- ---------------- COFIGURAÇÕES ---------------- -->
                         <div class="col-md-12" >
                             <s:form id="connectionForm" namespace="/" action="index" cssClass="form-horizontal" method="post" theme="simple">
@@ -117,46 +116,11 @@
                         </div>
                         <!-- ---------------- FIM COFIGURAÇÕES ---------------- -->
 
-
-                        <!-- ---------------- MAPPING ---------------- -->
-                        <div class="col-md-12" >
-                            <s:form id="mappingForm" namespace="/" action="index" cssClass="form-horizontal" method="post" theme="simple">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" style="padding: 2px 30px;">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                <label style="margin-bottom: 0px; padding-top: 8px; padding-bottom: 7px; cursor: pointer; width: 50%">
-                                                    <span class="glyphicon glyphicon-th-list"></span> Integration Map
-                                                </label>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                        <div class="panel-body integration-panel">
-                                        </div>
-                                        <div class="panel-footer text-right">
-                                            <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
-                                            <a class="btn btn-primary" href="javascript:saveMapping();"><i class="glyphicon glyphicon-save"></i> Save Mapping</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </s:form>
-                        </div>
-                        <!-- ---------------- FIM SOFWTARES ---------------- -->
-
                     </div>
                 </div>
             </div>
 
             <div class="container">
-                <!-- ---------------- MEMÓRIA ---------------- -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="log" class="panel-group">
-                        </div>
-                    </div>
-                </div>
-
                 <footer class="row">
                     <div class="col-md-12 text-center">© Copyright 2016.IESAM - UNISC - Universidade de Santa Cruz do Sul - Todos os direitos reservados.</br>
                         <a href="mailto:grohr@mx2.unisc.br">Guilherme Rohr</a>

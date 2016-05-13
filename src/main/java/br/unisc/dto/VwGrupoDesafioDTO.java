@@ -3,7 +3,6 @@ package br.unisc.dto;
 import br.unisc.model.Desafio;
 import br.unisc.model.Grupo;
 import br.unisc.model.GrupoDesafio;
-import br.unisc.model.IndividuoDesafio;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -100,6 +99,9 @@ public class VwGrupoDesafioDTO {
 
         gd.setDesafio(d);
         gd.setGrupo(g);
+        gd.setDtAtingido(dtAtingido);
+        gd.setSgAtingido(sgAtingido);
+        gd.setVlAtingido(vlAtingido);
         return gd;
     }
 

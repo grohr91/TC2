@@ -33,7 +33,6 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Meta.findAll", query = "SELECT m FROM Meta m"),
     @NamedQuery(name = "Meta.findByIdMeta", query = "SELECT m FROM Meta m WHERE m.idMeta = :idMeta"),
-    @NamedQuery(name = "Meta.findByIdMetaSg", query = "SELECT m FROM Meta m WHERE m.idMetaSg = :idMetaSg"),
     @NamedQuery(name = "Meta.findByNmMeta", query = "SELECT m FROM Meta m WHERE m.nmMeta = :nmMeta"),
     @NamedQuery(name = "Meta.findBySgTipo", query = "SELECT m FROM Meta m WHERE m.sgTipo = :sgTipo"),
     @NamedQuery(name = "Meta.findByFgObrigatorio", query = "SELECT m FROM Meta m WHERE m.fgObrigatorio = :fgObrigatorio"),
@@ -49,8 +48,6 @@ public class Meta implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_meta")
     private Integer idMeta;
-    @Column(name = "id_meta_sg")
-    private Integer idMetaSg;
     @Basic(optional = false)
     @Column(name = "nm_meta")
     private String nmMeta;
@@ -62,7 +59,6 @@ public class Meta implements Serializable {
     @Column(name = "dt_deadline")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtDeadline;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "vl_atingir")
     private Double vlAtingir;
     @Column(name = "sg_situacao_atingir")
@@ -100,14 +96,6 @@ public class Meta implements Serializable {
 
     public void setIdMeta(Integer idMeta) {
         this.idMeta = idMeta;
-    }
-
-    public Integer getIdMetaSg() {
-        return idMetaSg;
-    }
-
-    public void setIdMetaSg(Integer idMetaSg) {
-        this.idMetaSg = idMetaSg;
     }
 
     public String getNmMeta() {

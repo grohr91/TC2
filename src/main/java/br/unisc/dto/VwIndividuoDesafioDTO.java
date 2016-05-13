@@ -99,6 +99,9 @@ public class VwIndividuoDesafioDTO {
 
         id.setIndividuo(i);
         id.setDesafio(d);
+        id.setDtAtingido(dtAtingido);
+        id.setSgAtingido(sgAtingido);
+        id.setVlAtingido(vlAtingido);
         return id;
     }
 

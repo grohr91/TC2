@@ -35,8 +35,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "GrupoDesafio.findByIdGrupoDesafio", query = "SELECT g FROM GrupoDesafio g WHERE g.idGrupoDesafio = :idGrupoDesafio"),
     @NamedQuery(name = "GrupoDesafio.findBySgStatus", query = "SELECT g FROM GrupoDesafio g WHERE g.sgStatus = :sgStatus"),
     @NamedQuery(name = "GrupoDesafio.findByDtInicio", query = "SELECT g FROM GrupoDesafio g WHERE g.dtInicio = :dtInicio"),
-    @NamedQuery(name = "GrupoDesafio.findByDtFim", query = "SELECT g FROM GrupoDesafio g WHERE g.dtFim = :dtFim"),
-    @NamedQuery(name = "GrupoDesafio.findByXpTotalGanho", query = "SELECT g FROM GrupoDesafio g WHERE g.xpTotalGanho = :xpTotalGanho")})
+    @NamedQuery(name = "GrupoDesafio.findByDtFim", query = "SELECT g FROM GrupoDesafio g WHERE g.dtFim = :dtFim")})
 public class GrupoDesafio implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,7 +52,6 @@ public class GrupoDesafio implements Serializable {
     @Column(name = "dt_fim")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtFim;
-    @Basic(optional = false)
     @Column(name = "xp_total_ganho")
     private int xpTotalGanho;
     @Column(name = "vl_atingido")

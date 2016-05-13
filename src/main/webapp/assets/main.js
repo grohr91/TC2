@@ -19,13 +19,11 @@ function process() {
         url: $("#url").val() + "/processGamification",
         data: $("#connectionForm").serialize(),
     }).done(function (data) {
-        if (data.dsMessage == null || data.dsMessage == "") {
-            $(".integration-panel").empty().append(data);
-//            $('[href="#collapseConfig"]').addClass('collapsed').attr('aria-expanded', false);
-//            $("#collapseConfig").addClass("collapse").removeClass('in');
-//            $(".table-info a").click();
-        } else {
+        if (data.dsMessage != null && data.dsMessage != "") {
             $("#message-div").empty().append(data.dsMessage);
+        }
+        if (data.dsInfo != null && data.dsInfo != "") {
+            $("#message-div").empty().append(data.dsInfo);
         }
     });
 }

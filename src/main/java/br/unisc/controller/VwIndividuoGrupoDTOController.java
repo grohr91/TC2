@@ -5,6 +5,7 @@ import br.unisc.dto.VwIndividuoGrupoDTO;
 import br.unisc.model.Grupo;
 import br.unisc.model.GrupoIndividuo;
 import br.unisc.model.Individuo;
+import br.unisc.util.DBUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -24,26 +25,35 @@ public class VwIndividuoGrupoDTOController {
     }
 
     public List<VwIndividuoGrupoDTO> findIndividuoGrupo() {
-        Query q = conn.getEm().createNativeQuery("SELECT * FROM vw_individuo_grupo "
-                + "ORDER BY id_individuo", VwIndividuoGrupoDTO.class);
+        Query q = conn.getEm().createNativeQuery("SELECT DISTINCT * FROM vw_individuo_grupo "
+                + "ORDER BY id_individuo ", VwIndividuoGrupoDTO.class);
         return q.getResultList();
     }
 
     public Individuo insertOrUpdate(VwIndividuoGrupoDTO obj) {
-        Grupo g = em.merge(obj.toIndividuo().getGrupo());
         Individuo i = em.merge(obj.toIndividuo());
         em.flush();
 
-        GrupoIndividuo gi = findIndividuoGrupo(g, i);
-        gi = em.merge(gi);
+        // grupo
+        Grupo g = null;
+        if (obj.toIndividuo().getGrupo() != null && obj.toIndividuo().getGrupo().getIdGrupo() != null) {
+            g = em.merge(obj.toIndividuo().getGrupo());
+        }
+
+        // grupo_individuo
+        if (g != null) {
+            GrupoIndividuo gi = findIndividuoGrupo(g, i);
+            gi = em.merge(gi);
+        }
 
         em.flush();
         return i;
     }
 
     public GrupoIndividuo findIndividuoGrupo(Grupo g, Individuo i) {
-        Query q = em.createNamedQuery("SELECT * FROM grupo_individuo "
-                + "WHERE id_grupo = ?1 AND id_individuo = ?2", GrupoIndividuo.class);
+        Query q = em.createNativeQuery("SELECT * FROM grupo_individuo "
+                + "WHERE id_grupo = ?1 AND id_individuo = ?2 "
+                + "ORDER BY id_individuo ASC ", GrupoIndividuo.class);
         q.setParameter(1, g.getIdGrupo());
         q.setParameter(2, i.getIdIndividuo());
         List<GrupoIndividuo> grupoIndividuoList = q.getResultList();

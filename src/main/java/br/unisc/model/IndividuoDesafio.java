@@ -35,8 +35,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "IndividuoDesafio.findByIdIndividuoDesafio", query = "SELECT i FROM IndividuoDesafio i WHERE i.idIndividuoDesafio = :idIndividuoDesafio"),
     @NamedQuery(name = "IndividuoDesafio.findBySgStatus", query = "SELECT i FROM IndividuoDesafio i WHERE i.sgStatus = :sgStatus"),
     @NamedQuery(name = "IndividuoDesafio.findByDtInicio", query = "SELECT i FROM IndividuoDesafio i WHERE i.dtInicio = :dtInicio"),
-    @NamedQuery(name = "IndividuoDesafio.findByDtFim", query = "SELECT i FROM IndividuoDesafio i WHERE i.dtFim = :dtFim"),
-    @NamedQuery(name = "IndividuoDesafio.findByXpTotalGanho", query = "SELECT i FROM IndividuoDesafio i WHERE i.xpTotalGanho = :xpTotalGanho")})
+    @NamedQuery(name = "IndividuoDesafio.findByDtFim", query = "SELECT i FROM IndividuoDesafio i WHERE i.dtFim = :dtFim")})
 public class IndividuoDesafio implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,9 +52,6 @@ public class IndividuoDesafio implements Serializable {
     @Column(name = "dt_fim")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtFim;
-    @Basic(optional = false)
-    @Column(name = "xp_total_ganho")
-    private double xpTotalGanho;
     @Column(name = "vl_atingido")
     private Float vlAtingido;
     @Column(name = "sg_atingido")
@@ -82,11 +78,6 @@ public class IndividuoDesafio implements Serializable {
     public IndividuoDesafio(Individuo i, Desafio d) {
         this.individuo = i;
         this.desafio = d;
-    }
-
-    public IndividuoDesafio(Integer idIndividuoDesafio, double xpTotalGanho) {
-        this.idIndividuoDesafio = idIndividuoDesafio;
-        this.xpTotalGanho = xpTotalGanho;
     }
 
     public Integer getIdIndividuoDesafio() {
@@ -119,14 +110,6 @@ public class IndividuoDesafio implements Serializable {
 
     public void setDtFim(Date dtFim) {
         this.dtFim = dtFim;
-    }
-
-    public double getXpTotalGanho() {
-        return xpTotalGanho;
-    }
-
-    public void setXpTotalGanho(double xpTotalGanho) {
-        this.xpTotalGanho = xpTotalGanho;
     }
 
     public Individuo getIndividuo() {

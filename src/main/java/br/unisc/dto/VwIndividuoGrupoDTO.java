@@ -15,8 +15,10 @@ import javax.persistence.Table;
 @Table(name = "vw_individuo_grupo")
 public class VwIndividuoGrupoDTO {
 
-    // player
     @Id
+    @Column(name = "id")
+    private Integer id;
+    // player
     @Column(name = "id_individuo")
     private Integer idIndividuo;
     @Column(name = "nm_individuo")
@@ -27,6 +29,14 @@ public class VwIndividuoGrupoDTO {
     private Integer idGrupo;
     @Column(name = "nm_grupo")
     private String nmGrupo;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getIdIndividuo() {
         return idIndividuo;

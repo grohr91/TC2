@@ -3,7 +3,6 @@ package br.unisc.controller;
 import br.unisc.dto.ConnectionDTO;
 import br.unisc.dto.VwIndividuoDesafioDTO;
 import br.unisc.model.Desafio;
-import br.unisc.model.GrupoIndividuo;
 import br.unisc.model.Individuo;
 import br.unisc.model.IndividuoDesafio;
 import java.util.List;
@@ -26,7 +25,7 @@ public class VwIndividuoDesafioDTOController {
 
     public List<VwIndividuoDesafioDTO> findIndividuoDesafio() {
         Query q = conn.getEm().createNativeQuery("SELECT * FROM vw_individuo_desafio "
-                + "ORDER BY id_individuo", VwIndividuoDesafioDTO.class);
+                + "ORDER BY id_individuo ", VwIndividuoDesafioDTO.class);
         return q.getResultList();
     }
 
@@ -46,7 +45,7 @@ public class VwIndividuoDesafioDTOController {
     }
 
     public IndividuoDesafio findIndividuoDesafio(Individuo i, Desafio d) {
-        Query q = em.createNamedQuery("SELECT * FROM individuo_desafio "
+        Query q = em.createNativeQuery("SELECT * FROM individuo_desafio "
                 + "WHERE id_individuo = ?1 AND id_desafio = ?2", IndividuoDesafio.class);
         q.setParameter(1, i.getIdIndividuo());
         q.setParameter(2, d.getIdDesafio());
