@@ -105,10 +105,58 @@
                                             </div>
                                         </div>
 
-                                        <div class="panel-footer text-right">
-                                            <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
-                                            <!--<a class="btn btn-default" href="javascript:testConnection();"><i class="glyphicon glyphicon-play"></i> Test Connection</a>-->
-                                            <a class="btn btn-primary" href="javascript:process();"><i class="glyphicon glyphicon-log-in"></i> Load Data</a>
+                                        <div class="panel-footer">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6 text-left">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                            Download
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                            <li>
+                                                                <a href="<%=request.getContextPath()%>/downloadIndividuos" target="_new">
+                                                                    <i class="glyphicon glyphicon-download-alt"></i> Indivíduo
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="<%=request.getContextPath()%>/downloadGrupos" target="_new">
+                                                                    <i class="glyphicon glyphicon-download-alt"></i> Grupo
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="<%=request.getContextPath()%>/downloadDesafios" target="_new">
+                                                                    <i class="glyphicon glyphicon-download-alt"></i> Desafio
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="<%=request.getContextPath()%>/downloadGrupoIndividuo" target="_new">
+                                                                    <i class="glyphicon glyphicon-download-alt"></i> Grupo Indivíduo
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="<%=request.getContextPath()%>/downloadIndividuoDesafio" target="_new">
+                                                                    <i class="glyphicon glyphicon-download-alt"></i> Indivíduo Desafio
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="<%=request.getContextPath()%>/downloadGrupoDesafio" target="_new">
+                                                                    <i class="glyphicon glyphicon-download-alt"></i> Grupo Desafio
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="<%=request.getContextPath()%>/downloadDescricaoSituacao" target="_new">
+                                                                    <i class="glyphicon glyphicon-download-alt"></i> Descrição Situacao
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                                    <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
+                                                    <a class="btn btn-primary" href="javascript:process();"><i class="glyphicon glyphicon-log-in"></i> Load Data</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

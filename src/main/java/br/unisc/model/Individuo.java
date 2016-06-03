@@ -28,7 +28,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "individuo")
 @NamedQueries({
-    @NamedQuery(name = "Individuo.findAll", query = "SELECT i FROM Individuo i"),
+    @NamedQuery(name = "Individuo.findAll", query = "SELECT i FROM Individuo i ORDER BY i.nmIndividuo"),
     @NamedQuery(name = "Individuo.findByIdIndividuo", query = "SELECT i FROM Individuo i WHERE i.idIndividuo = :idIndividuo"),
     @NamedQuery(name = "Individuo.findByNmIndividuo", query = "SELECT i FROM Individuo i WHERE i.nmIndividuo = :nmIndividuo"),
     @NamedQuery(name = "Individuo.findByDtNascimento", query = "SELECT i FROM Individuo i WHERE i.dtNascimento = :dtNascimento"),
