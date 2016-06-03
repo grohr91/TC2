@@ -48,7 +48,7 @@
                                         <h4 class="panel-title">
                                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseConfig" aria-expanded="true" aria-controls="collapseOne">
                                                 <label style='margin-bottom: 0px; padding-top: 8px; padding-bottom: 7px; cursor: pointer; width: 50%'>
-                                                    <span class="glyphicon glyphicon-cog"></span> Configure a host connection
+                                                    <span class="glyphicon glyphicon-cog"></span> Configuração com sistema de gestão
                                                 </label>
                                             </a>
 
@@ -64,42 +64,42 @@
                                         <div class="panel-body">
                                             <div class="col-md-6">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">Host Address</span>
+                                                    <span class="input-group-addon">Endereço IP</span>
                                                     <s:textfield type="text" id="nrIp" name="connection.nrIp" cssClass="form-control" placeholder="Ex: 127.0.0.1"/>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">Port</span>
+                                                    <span class="input-group-addon">Porta</span>
                                                     <s:textfield type="text" id="nrPort" name="connection.nrPort" cssClass="form-control" placeholder="Ex: 5432"/>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">Schema</span>
+                                                    <span class="input-group-addon">Esquema</span>
                                                     <s:textfield type="text" id="nmSchema" name="connection.nmSchema" cssClass="form-control"/>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">Database</span>
+                                                    <span class="input-group-addon">Banco de dados</span>
                                                     <s:textfield type="text" id="nmDatabase" name="connection.nmDatabase" cssClass="form-control" placeholder="Database name"/>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">Usename</span>
+                                                    <span class="input-group-addon">Usuário</span>
                                                     <s:textfield type="text" id="nmUser" name="connection.nmUser" cssClass="form-control" placeholder="Ex: root"/>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">Password</span>
+                                                    <span class="input-group-addon">Senha</span>
                                                     <s:textfield id="cdPass" name="connection.cdPass" cssClass="form-control" placeholder="Ex: myP@ssword"/>
                                                 </div>
                                             </div>
@@ -110,7 +110,7 @@
                                                 <div class="col-md-6 col-sm-6 col-xs-6 text-left">
                                                     <div class="dropdown">
                                                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                            Download
+                                                            Baixar
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -153,8 +153,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-                                                    <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Clear</a>
-                                                    <a class="btn btn-primary" href="javascript:process();"><i class="glyphicon glyphicon-log-in"></i> Load Data</a>
+                                                    <a class="btn btn-default" href="javascript:clearForm('connectionForm');"><i class="glyphicon glyphicon-repeat"></i> Limpar</a>
+                                                    <a class="btn btn-primary" href="javascript:process();"><i class="glyphicon glyphicon-log-in"></i> Processar</a>
                                                 </div>
                                             </div>
                                         </div>
